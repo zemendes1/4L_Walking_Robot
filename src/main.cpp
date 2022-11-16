@@ -11,18 +11,18 @@ RP2040_PWM* PWM_Instance;
 void setup() {
   // put your setup code here, to run once:
   
-  PWM_Instance = new RP2040_PWM(MOTOR,100,26);
+  PWM_Instance = new RP2040_PWM(MOTOR,150,39);
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-    PWM_Instance -> setPWM(MOTOR,100,4);
+    PWM_Instance -> setPWM(MOTOR,150,6);
     Serial.print("aa");
     delay(1000);
 
-    PWM_Instance -> setPWM(MOTOR,100,26);
+    PWM_Instance -> setPWM(MOTOR,150,39);
     delay(1000);
     
 }
