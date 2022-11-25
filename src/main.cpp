@@ -13,7 +13,10 @@
 
 
 #define Freq 150
-#define Ograus 6
+#define Ograus_Motor1 35.167
+#define Ograus_Motor2 19.667
+#define Ograus_Motor3 19.333
+#define Ograus_Motor4 35.833
 
 RP2040_PWM *PWM_Instance_1A;
 RP2040_PWM *PWM_Instance_1B;
@@ -30,11 +33,11 @@ void setup()
 {
   // put your setup code here, to run once:
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, Ograus);
-  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, Ograus);
+  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, Ograus_Motor1);
+  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, Ograus_Motor2);
 
-  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, Ograus);
-  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, Ograus);
+  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, Ograus_Motor3);
+  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, Ograus_Motor4);
 
   /*PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, Ograus);
   PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, Ograus);
@@ -48,13 +51,46 @@ void loop()
 
   for (int i = 1; i < 5; i++)
   {
-    servo_angle(5, i);
+    
+    
+    if(i==2){
+      servo_angle(82, i);
+    }
+
+    else if(i==3){
+      servo_angle(80, i);
+    }
+
+    else if(i==1){
+      servo_angle(175, i);
+    }
+
+    else if(i==4){
+      servo_angle(179, i);
+    }
+
+
+    
   }
   delay(1000);
   
   for (int i = 1; i < 5; i++)
   {
-    servo_angle(175, i);
+    if(i==1 ){
+      servo_angle(87, i);
+    }
+
+    else if(i==4){
+      servo_angle(90, i);
+    }
+
+    else if(i==2 ){
+      servo_angle(175, i);
+    }
+
+    else if( i==3){
+      servo_angle(170, i);
+    }
   }
   delay(1000);
 }
