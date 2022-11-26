@@ -13,14 +13,19 @@
 
 
 #define Freq 150
-#define Ograus_Motor1 35.167
-#define Ograus_Motor2 19.667
-#define Ograus_Motor3 19.333
-#define Ograus_Motor4 35.833
-#define Ograus_Motor5 21
-#define Ograus_Motor6 21
-#define Ograus_Motor7 21
-#define Ograus_Motor8 21
+#define _0graus_Motor1 20.5
+#define _0graus_Motor2 35.1667
+#define _0graus_Motor3 34.333
+#define _0graus_Motor4 21.333
+#define _0graus_Motor5 21
+#define _0graus_Motor6 21
+#define _0graus_Motor7 21
+#define _0graus_Motor8 21
+
+#define _90graus_Motor1 35.167
+#define _90graus_Motor2 19.667
+#define _90graus_Motor3 19
+#define _90graus_Motor4 36
 
 
 RP2040_PWM *PWM_Instance_1A;
@@ -38,17 +43,17 @@ void setup()
 {
   // put your setup code here, to run once:
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, Ograus_Motor1);
-  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, Ograus_Motor2);
+  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _0graus_Motor1);
+  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _0graus_Motor2);
 
-  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, Ograus_Motor3);
-  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, Ograus_Motor4);
+  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _0graus_Motor3);
+  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _0graus_Motor4);
 
-  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, Ograus_Motor5);
-  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, Ograus_Motor6);
+  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _0graus_Motor5);
+  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _0graus_Motor6);
 
-  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, Ograus_Motor7);
-  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, Ograus_Motor8);
+  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _0graus_Motor7);
+  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _0graus_Motor8);
 }
 
 void loop()
@@ -110,28 +115,35 @@ void loop()
 
 void servo_angle(int angle, int motor)
 {
-
-  if(angle < 0 || angle > 180){ return; }
-
+//if(angle < 0 || angle > 180){ return; }
+  int m , b = 0;  
   float value=0;
 
   if (motor == 1){
-    value = 0.1630 * angle + 20.50;
+    int m = (_0graus_Motor1-_90graus_Motor1)/(0-90);//calcula declive
+    int b = _0graus_Motor1; 
+    value = m * angle +b ;
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
   else if (motor == 2){
-    value = 35.17 -0.1722 * angle;
+    int m = (_0graus_Motor2-_90graus_Motor2)/(0-90);
+    int b = _0graus_Motor2; 
+    value = m * angle +b ;
     PWM_Instance_1B->setPWM(MOTOR_2, Freq, value);
   }
 
   else if (motor == 3){
-    value = 34.33 - 0.1704 * angle;
+    int m = (_0graus_Motor3-_90graus_Motor3)/(0-90);
+    int b = _0graus_Motor3; 
+    value = m * angle +b ;
     PWM_Instance_6A->setPWM(MOTOR_3, Freq, value);
   }
 
   else if (motor == 4){
-    value = 0.1630 * angle + 21.33;
+    int m = (_0graus_Motor4-_90graus_Motor4)/(0-90);
+    int b = _0graus_Motor4; 
+    value = m * angle +b ;
     PWM_Instance_6B->setPWM(MOTOR_4, Freq, value);
   }
 
