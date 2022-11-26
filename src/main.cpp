@@ -45,16 +45,18 @@ RP2040_PWM *PWM_Instance_0A;
 RP2040_PWM *PWM_Instance_0B;
 
 void servo_angle(int angle, int motor);
+void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
+void anda_frente();
 
 void setup()
 {
   // put your setup code here, to run once:
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _0graus_Motor1);
-  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _0graus_Motor2);
+  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _90graus_Motor1);
+  PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _90graus_Motor2);
 
-  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _0graus_Motor3);
-  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _0graus_Motor4);
+  PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _90graus_Motor3);
+  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _90graus_Motor4);
 
   PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _0graus_Motor5);
   PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _0graus_Motor6);
@@ -66,25 +68,37 @@ void setup()
 void loop()
 {
 
+  /*servo_angle(45,1);
+
+  delay(2000);
+
+  servo_angle(90,1);
+
+  delay(2000);
+
+  servo_angle(45,3);
+  servo_angle(45,2);
+  servo_angle(45,4);
+
+  delay(2000);
+
+  servo_angle(90,3);
+  servo_angle(90,2);
+  servo_angle(90,4);
+
   servo_angle(0,5);
   servo_angle(0,6);
   servo_angle(0,7);
   servo_angle(0,8);
 
-  servo_angle(90,1);
-  servo_angle(0,2);
-  servo_angle(0,3);
-  servo_angle(90,4);
+  delay(2000);*/
 
-  delay(1000);
 
-  servo_angle(0,1);
-  servo_angle(90,2);
-  servo_angle(90,3);
-  servo_angle(0,4);
+  anda_frente();
+
+
   
- 
-  delay(1000);
+
 }
 
 void servo_angle(int angle, int motor){
@@ -159,4 +173,38 @@ void servo_angle(int angle, int motor){
     PWM_Instance_0B->setPWM(MOTOR_8, Freq, value);
   }
     
+}
+
+
+void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms){
+
+  servo_angle(angulo1, 1);
+  servo_angle(angulo2, 2);
+  servo_angle(angulo3, 3);
+  servo_angle(angulo4, 4);
+  servo_angle(angulo5, 5);
+  servo_angle(angulo6, 6);
+  servo_angle(angulo7, 7);
+  servo_angle(angulo8, 8);
+
+  delay(delayms);
+
+
+}
+
+void anda_frente(){
+
+  recebe_angulos(90,90,90,90,20,20,20,20,200);
+  recebe_angulos(90,90,45,90,20,0,0,20,200);
+  recebe_angulos(90,90,45,90,20,20,20,20,200);
+  recebe_angulos(90,90,45,90,0,20,20,0,200);
+  recebe_angulos(90,45,90,45,0,20,20,0,200);
+  recebe_angulos(90,45,90,45,20,20,20,20,200);
+  recebe_angulos(90,90,90,45,20,0,0,20,200);
+  recebe_angulos(45,90,90,90,20,0,0,20,200);
+  recebe_angulos(45,90,90,90,20,20,20,20,200);
+  recebe_angulos(45,90,90,90,0,20,20,20,200);
+  recebe_angulos(90,90,90,90,20,20,20,20,200);
+
+
 }
