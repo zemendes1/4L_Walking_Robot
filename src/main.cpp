@@ -13,6 +13,7 @@
 
 
 #define Freq 150
+
 #define _0graus_Motor1 20.5
 #define _0graus_Motor2 35.1667
 #define _0graus_Motor3 34.333
@@ -22,8 +23,6 @@
 #define _0graus_Motor6 37
 #define _0graus_Motor7 37.5
 #define _0graus_Motor8 10
-
-
 
 #define _90graus_Motor1 35.167
 #define _90graus_Motor2 19.667
@@ -88,17 +87,18 @@ void loop()
   delay(1000);
 }
 
-void servo_angle(int angle, int motor)
-{
-//if(angle < 0 || angle > 180){ return; }
-  float m =0.00f, b = 0.00f;  
-  float value=0;
+void servo_angle(int angle, int motor){
 
-  if (motor == 1){
+  if(angle < 0 || angle > 90){ return; }
+
+  float m =0.00f, b = 0.00f;  
+  float value=0.00f;
+
+  if (motor == 1){//Cada if faz uma regressão linear mediante os parametros definidos em cima
     m = (_0graus_Motor1-_90graus_Motor1);
-    m=m/(0-90);//calcula declive
+    m=m/(0-90);   //calcula declive
     b = _0graus_Motor1; 
-    value = m * angle +b ;
+    value = m * angle +b ; // formato y=mx+b
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
