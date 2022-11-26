@@ -17,15 +17,23 @@
 #define _0graus_Motor2 35.1667
 #define _0graus_Motor3 34.333
 #define _0graus_Motor4 21.333
-#define _0graus_Motor5 21
-#define _0graus_Motor6 21
-#define _0graus_Motor7 21
-#define _0graus_Motor8 21
+
+#define _0graus_Motor5 9.5
+#define _0graus_Motor6 37
+#define _0graus_Motor7 37.5
+#define _0graus_Motor8 10
+
+
 
 #define _90graus_Motor1 35.167
 #define _90graus_Motor2 19.667
 #define _90graus_Motor3 19
 #define _90graus_Motor4 36
+
+#define _90graus_Motor5 24.8
+#define _90graus_Motor6 21.7
+#define _90graus_Motor7 22.4
+#define _90graus_Motor8 25.3
 
 
 RP2040_PWM *PWM_Instance_1A;
@@ -65,105 +73,94 @@ void loop()
   servo_angle(0,3);
   servo_angle(0,4);
 
-  //para levantar o robot angulo menor
-  servo_angle(0,5);
-    
+  servo_angle(90,5);
+  servo_angle(90,6);
+  servo_angle(90,7);
+  servo_angle(90,8);
 
-  //para levantar o robot angulo maior
-  servo_angle(180,6);
-    
-
-  //para levantar o robot angulo maior
-  servo_angle(180,7);
-    
-
-  //para levantar o robot angulo menor
-  servo_angle(0,8);
-    
-
-
-    
-  
   delay(1000);
 
-  
+  //servo_angle(90,5);
+ 
 
+  /*
   servo_angle(90,1);
   servo_angle(90,2);
   servo_angle(90,3);
   servo_angle(90,4);
-
-  //para levantar o robot angulo menor
-  servo_angle(45,5);
+  servo_angle(90,5);
+  servo_angle(90,6);
+  servo_angle(90,7);
+  servo_angle(90,8);*/
     
 
-  //para levantar o robot angulo maior
-  servo_angle(135,6);
-  
-
-  //para levantar o robot angulo maior
-  servo_angle(135,7);
-    
-
-  //para levantar o robot angulo menor
-  servo_angle(45,8);
-    
-
-  
   delay(1000);
 }
 
 void servo_angle(int angle, int motor)
 {
 //if(angle < 0 || angle > 180){ return; }
-  int m , b = 0;  
+  float m =0.00f, b = 0.00f;  
   float value=0;
 
   if (motor == 1){
-    int m = (_0graus_Motor1-_90graus_Motor1)/(0-90);//calcula declive
-    int b = _0graus_Motor1; 
+    m = (_0graus_Motor1-_90graus_Motor1)/(0-90);//calcula declive
+    b = _0graus_Motor1; 
     value = m * angle +b ;
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
   else if (motor == 2){
-    int m = (_0graus_Motor2-_90graus_Motor2)/(0-90);
-    int b = _0graus_Motor2; 
+    m = (_0graus_Motor2-_90graus_Motor2)/(0-90);
+    b = _0graus_Motor2; 
     value = m * angle +b ;
     PWM_Instance_1B->setPWM(MOTOR_2, Freq, value);
   }
 
   else if (motor == 3){
-    int m = (_0graus_Motor3-_90graus_Motor3)/(0-90);
-    int b = _0graus_Motor3; 
+    m = (_0graus_Motor3-_90graus_Motor3)/(0-90);
+    b = _0graus_Motor3; 
     value = m * angle +b ;
     PWM_Instance_6A->setPWM(MOTOR_3, Freq, value);
   }
 
   else if (motor == 4){
-    int m = (_0graus_Motor4-_90graus_Motor4)/(0-90);
-    int b = _0graus_Motor4; 
+    m = (_0graus_Motor4-_90graus_Motor4)/(0-90);
+    b = _0graus_Motor4; 
     value = m * angle +b ;
     PWM_Instance_6B->setPWM(MOTOR_4, Freq, value);
   }
 
   else if (motor == 5){
-    value = (0.16666666666666667) * angle + 6;
+    m = (_0graus_Motor5 - _90graus_Motor5);
+    m=m/(0-90);
+    b = _0graus_Motor5; 
+    value = m * angle +b ;
     PWM_Instance_7A->setPWM(MOTOR_5, Freq, value);
   }
 
   else if (motor == 6){
-    value = (0.16666666666666667) * angle + 6;
+    m = (_0graus_Motor6 - _90graus_Motor6);
+    m=m/(0-90);
+    b = _0graus_Motor6; 
+    value = m * angle +b ;
     PWM_Instance_7B->setPWM(MOTOR_6, Freq, value);
   }
 
   else if (motor == 7){
-    value = (0.16666666666666667) * angle + 6;
+    m = (_0graus_Motor7 - _90graus_Motor7);
+    m=m/(0-90);
+    b = _0graus_Motor7; 
+    value = m * angle +b ;
+    Serial.print(value);
     PWM_Instance_0A->setPWM(MOTOR_7, Freq, value);
   }
 
   else if (motor == 8){
-    value = (0.16666666666666667) * angle + 6;
+    m = (_0graus_Motor8 - _90graus_Motor8);
+    m=m/(0-90);
+    b = _0graus_Motor8; 
+    value = m * angle +b ;
     PWM_Instance_0B->setPWM(MOTOR_8, Freq, value);
   }
     
