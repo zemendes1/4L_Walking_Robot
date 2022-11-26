@@ -67,33 +67,24 @@ void setup()
 void loop()
 {
 
-  
-  servo_angle(0,1);
+  servo_angle(0,5);
+  servo_angle(0,6);
+  servo_angle(0,7);
+  servo_angle(0,8);
+
+  servo_angle(90,1);
   servo_angle(0,2);
   servo_angle(0,3);
-  servo_angle(0,4);
-
-  servo_angle(90,5);
-  servo_angle(90,6);
-  servo_angle(90,7);
-  servo_angle(90,8);
+  servo_angle(90,4);
 
   delay(1000);
 
-  //servo_angle(90,5);
- 
-
-  /*
-  servo_angle(90,1);
+  servo_angle(0,1);
   servo_angle(90,2);
   servo_angle(90,3);
-  servo_angle(90,4);
-  servo_angle(90,5);
-  servo_angle(90,6);
-  servo_angle(90,7);
-  servo_angle(90,8);*/
-    
-
+  servo_angle(0,4);
+  
+ 
   delay(1000);
 }
 
@@ -104,28 +95,32 @@ void servo_angle(int angle, int motor)
   float value=0;
 
   if (motor == 1){
-    m = (_0graus_Motor1-_90graus_Motor1)/(0-90);//calcula declive
+    m = (_0graus_Motor1-_90graus_Motor1);
+    m=m/(0-90);//calcula declive
     b = _0graus_Motor1; 
     value = m * angle +b ;
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
   else if (motor == 2){
-    m = (_0graus_Motor2-_90graus_Motor2)/(0-90);
+    m = (_0graus_Motor2-_90graus_Motor2);
+    m=m/(0-90);
     b = _0graus_Motor2; 
     value = m * angle +b ;
     PWM_Instance_1B->setPWM(MOTOR_2, Freq, value);
   }
 
   else if (motor == 3){
-    m = (_0graus_Motor3-_90graus_Motor3)/(0-90);
+    m = (_0graus_Motor3-_90graus_Motor3);
+    m=m/(0-90);
     b = _0graus_Motor3; 
     value = m * angle +b ;
     PWM_Instance_6A->setPWM(MOTOR_3, Freq, value);
   }
 
   else if (motor == 4){
-    m = (_0graus_Motor4-_90graus_Motor4)/(0-90);
+    m = (_0graus_Motor4-_90graus_Motor4);
+    m=m/(0-90);
     b = _0graus_Motor4; 
     value = m * angle +b ;
     PWM_Instance_6B->setPWM(MOTOR_4, Freq, value);
