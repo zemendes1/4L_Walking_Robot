@@ -44,7 +44,16 @@ RP2040_PWM *PWM_Instance_0B;
 
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
-void anda_frente();
+void move_forward();// por faser
+void move_backwards();
+void move_left();
+void move_right();
+void turn_left();
+void turn_right();
+void standby();
+void liedown();
+void standup();
+void dancing();
 
 void setup()
 {
@@ -64,9 +73,12 @@ void setup()
 }
 
 void loop()
-{
-
-  anda_frente();
+{   
+  //standup();
+  //standby();
+  move_forward();
+  //dancing();
+  //liedown();
 }
 
 void servo_angle(int angle, int motor)
@@ -169,18 +181,70 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
   delay(delayms);
 }
 
-void anda_frente()
+void move_forward()
 {
+  recebe_angulos(90,90,90,90,30,30,30,30,100); // standby, ; 
+  recebe_angulos(90,90,45,90,30,0,0,30,100); // perna 1,2,3,4 up;  leg4 fw
+  recebe_angulos(90,90,45,90,30,30,30,30,100); // perna 1,2,3,4 down; 
+  recebe_angulos(90,90,45,90,0,30,30,0,100); // leg2, 3 up; 
+  recebe_angulos(90,45,90,45,0,30,30,0,100); // leg1, 4 bk;  leg2 fw
+  recebe_angulos(90,45,90,45,30,30,30,30,100); // leg2, 3 dn; 
+  recebe_angulos(90,45,90,45,30,0,0,30,100); // leg1, 4 up;  leg1 fw
+  recebe_angulos(45,90,90,90,30,0,0,30,100); // leg2, 3 bk; 
+  recebe_angulos(45,90,90,90,30,30,30,30,100); // leg1, 4 dn; 
+  recebe_angulos(45,90,90,90,0,30,30,30,100); // leg3 up, ; 
+  recebe_angulos(90,90,90,90,30,30,30,30,100); // leg3 fw dn, ; 
 
-  recebe_angulos(90, 90, 90, 90, 20, 20, 20, 20, 200); // standby (talvez só deve ser corrido uma vez)
-  recebe_angulos(90, 90, 45, 90, 20, 0, 0, 20, 200);   // leg1, 4 up;  leg4 fw
-  recebe_angulos(90, 90, 45, 90, 20, 20, 20, 20, 200); // leg1, 4 dn;
-  recebe_angulos(90, 90, 45, 90, 0, 20, 20, 0, 200);   // leg2, 3 up;
-  recebe_angulos(90, 45, 90, 45, 0, 20, 20, 0, 200);   // leg1, 4 bk;  leg2 fw
-  recebe_angulos(90, 45, 90, 45, 20, 20, 20, 20, 200); // leg2, 3 dn;
-  recebe_angulos(90, 90, 90, 45, 20, 0, 0, 20, 200);   // leg1, 4 up;  leg1 fw
-  recebe_angulos(45, 90, 90, 90, 20, 0, 0, 20, 200);   // leg2, 3 bk;
-  recebe_angulos(45, 90, 90, 90, 20, 20, 20, 20, 200); // leg1, 4 dn;
-  recebe_angulos(45, 90, 90, 90, 0, 20, 20, 20, 200);  // leg3 up
-  recebe_angulos(90, 90, 90, 90, 20, 20, 20, 20, 200); // leg3 fw dn
+
+  /*
+  recebe_angulos(45,45,45,45,20,20,20,20,100); // standby, ; 
+  recebe_angulos(45,45,90,45,20,0,0,20,100); // leg1, 4 up;  leg4 fw
+  recebe_angulos(45,45,90,45,20,20,20,20,100); // leg1, 4 dn; 
+  recebe_angulos(45,45,90,45,0,20,20,0,100); // leg2, 3 up; 
+  recebe_angulos(45,90,45,90,0,20,20,0,100); // leg1, 4 bk;  leg2 fw
+  recebe_angulos(45,90,45,90,20,20,20,20,100); // leg2, 3 dn; 
+  recebe_angulos(45,45,45,90,20,0,0,20,100); // leg1, 4 up;  leg1 fw
+  recebe_angulos(90,45,45,45,20,0,0,20,100); // leg2, 3 bk; 
+  recebe_angulos(90,45,45,45,20,20,20,20,100); // leg1, 4 dn; 
+  recebe_angulos(90,45,45,45,0,20,20,20,100); // leg3 up, ; 
+  recebe_angulos(45,45,45,45,20,20,20,20,100); // leg3 fw dn, ; 
+/*
+  recebe_angulos(90,90,90,90,70,70,70,70,100); // standby, ; 
+  recebe_angulos(90,90,45,90,70,90,70,70,100); // leg1, 4 up;  leg4 fw
+  recebe_angulos(90,90,45,90,70,70,70,70,100); // leg1, 4 dn; 
+  recebe_angulos(90,90,45,90,90,70,70,90,100); // leg2, 3 up; 
+  recebe_angulos(90,45,90,45,90,70,70,90,100); // leg1, 4 bk;  leg2 fw
+  recebe_angulos(90,45,90,45,70,70,70,70,100); // leg2, 3 dn; 
+  recebe_angulos(90,90,90,45,90,70,90,70,100); // leg1, 4 up;  leg1 fw
+  recebe_angulos(45,90,90,90,90,70,90,70,100); // leg2, 3 bk; 
+  recebe_angulos(45,90,90,90,70,70,70,70,100); // leg1, 4 dn; 
+  recebe_angulos(45,90,90,90,90,70,70,70,100); // leg3 up, ; 
+  recebe_angulos(90,90,90,90,70,70,70,70,100); // leg3 fw dn, ;
+*/
+}
+
+void standby(){
+  recebe_angulos(45,45,45,45,20,20,20,20,100);
+}
+
+void liedown(){
+  recebe_angulos(45,45,45,45,90,90,90,90,100);
+}
+
+void standup(){
+  recebe_angulos(45,45,45,45,0,0,0,0,100);
+}
+
+void dancing(){
+  recebe_angulos(90,  90,  90,  90,  90,  90,  90,  90,  300);
+  recebe_angulos(50,  90,  90,  90,  90,  90,  90,  90,  300);
+  recebe_angulos(90,  90,  90, 40,  90,  90,  90,  90,  300);
+  recebe_angulos(90,  90,  90,  90,  90,  90,  90,  50,  300);
+  recebe_angulos(90,  90,  90,  90, 40,  90,  90,  90,  300);
+  recebe_angulos(50,  90,  90,  90,  90,  90,  90,  90,  300);
+  recebe_angulos( 90,  90,  90, 40,  90,  90,  90,  90,  300);
+  recebe_angulos(90,  90,  90,  90,  90,  90,  90,  50,  300);
+  recebe_angulos(90,  90,  90,  90, 40,  90,  90,  90,  300);
+  recebe_angulos(90,  90,  90,  90,  90,  90,  90,  90,  300);
+
 }
