@@ -11,7 +11,6 @@
 #define MOTOR_7 16
 #define MOTOR_8 17
 
-
 #define Freq 150
 
 #define _0graus_Motor1 20.5
@@ -33,7 +32,6 @@
 #define _90graus_Motor6 21.7
 #define _90graus_Motor7 22.4
 #define _90graus_Motor8 25.3
-
 
 RP2040_PWM *PWM_Instance_1A;
 RP2040_PWM *PWM_Instance_1B;
@@ -68,115 +66,96 @@ void setup()
 void loop()
 {
 
-  /*servo_angle(45,1);
-
-  delay(2000);
-
-  servo_angle(90,1);
-
-  delay(2000);
-
-  servo_angle(45,3);
-  servo_angle(45,2);
-  servo_angle(45,4);
-
-  delay(2000);
-
-  servo_angle(90,3);
-  servo_angle(90,2);
-  servo_angle(90,4);
-
-  servo_angle(0,5);
-  servo_angle(0,6);
-  servo_angle(0,7);
-  servo_angle(0,8);
-
-  delay(2000);*/
-
-
   anda_frente();
-
-
-  
-
 }
 
-void servo_angle(int angle, int motor){
+void servo_angle(int angle, int motor)
+{
 
-  if(angle < 0 || angle > 90){ return; }
+  if (angle < 0 || angle > 90)
+  {
+    return;
+  }
 
-  float m =0.00f, b = 0.00f;  
-  float value=0.00f;
+  float m = 0.00f, b = 0.00f;
+  float value = 0.00f;
 
-  if (motor == 1){//Cada if faz uma regressão linear mediante os parametros definidos em cima
-    m = (_0graus_Motor1-_90graus_Motor1);
-    m=m/(0-90);   //calcula declive
-    b = _0graus_Motor1; 
-    value = m * angle +b ; // formato y=mx+b
+  if (motor == 1)
+  { // Cada if faz uma regressão linear mediante os parametros definidos em cima
+    m = (_0graus_Motor1 - _90graus_Motor1);
+    m = m / (0 - 90); // calcula declive
+    b = _0graus_Motor1;
+    value = m * angle + b; // formato y=mx+b
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
-  else if (motor == 2){
-    m = (_0graus_Motor2-_90graus_Motor2);
-    m=m/(0-90);
-    b = _0graus_Motor2; 
-    value = m * angle +b ;
+  else if (motor == 2)
+  {
+    m = (_0graus_Motor2 - _90graus_Motor2);
+    m = m / (0 - 90);
+    b = _0graus_Motor2;
+    value = m * angle + b;
     PWM_Instance_1B->setPWM(MOTOR_2, Freq, value);
   }
 
-  else if (motor == 3){
-    m = (_0graus_Motor3-_90graus_Motor3);
-    m=m/(0-90);
-    b = _0graus_Motor3; 
-    value = m * angle +b ;
+  else if (motor == 3)
+  {
+    m = (_0graus_Motor3 - _90graus_Motor3);
+    m = m / (0 - 90);
+    b = _0graus_Motor3;
+    value = m * angle + b;
     PWM_Instance_6A->setPWM(MOTOR_3, Freq, value);
   }
 
-  else if (motor == 4){
-    m = (_0graus_Motor4-_90graus_Motor4);
-    m=m/(0-90);
-    b = _0graus_Motor4; 
-    value = m * angle +b ;
+  else if (motor == 4)
+  {
+    m = (_0graus_Motor4 - _90graus_Motor4);
+    m = m / (0 - 90);
+    b = _0graus_Motor4;
+    value = m * angle + b;
     PWM_Instance_6B->setPWM(MOTOR_4, Freq, value);
   }
 
-  else if (motor == 5){
+  else if (motor == 5)
+  {
     m = (_0graus_Motor5 - _90graus_Motor5);
-    m=m/(0-90);
-    b = _0graus_Motor5; 
-    value = m * angle +b ;
+    m = m / (0 - 90);
+    b = _0graus_Motor5;
+    value = m * angle + b;
     PWM_Instance_7A->setPWM(MOTOR_5, Freq, value);
   }
 
-  else if (motor == 6){
+  else if (motor == 6)
+  {
     m = (_0graus_Motor6 - _90graus_Motor6);
-    m=m/(0-90);
-    b = _0graus_Motor6; 
-    value = m * angle +b ;
+    m = m / (0 - 90);
+    b = _0graus_Motor6;
+    value = m * angle + b;
     PWM_Instance_7B->setPWM(MOTOR_6, Freq, value);
   }
 
-  else if (motor == 7){
+  else if (motor == 7)
+  {
     m = (_0graus_Motor7 - _90graus_Motor7);
-    m=m/(0-90);
-    b = _0graus_Motor7; 
-    value = m * angle +b ;
+    m = m / (0 - 90);
+    b = _0graus_Motor7;
+    value = m * angle + b;
     Serial.print(value);
     PWM_Instance_0A->setPWM(MOTOR_7, Freq, value);
   }
 
-  else if (motor == 8){
+  else if (motor == 8)
+  {
     m = (_0graus_Motor8 - _90graus_Motor8);
-    m=m/(0-90);
-    b = _0graus_Motor8; 
-    value = m * angle +b ;
+    m = m / (0 - 90);
+    b = _0graus_Motor8;
+    value = m * angle + b;
     PWM_Instance_0B->setPWM(MOTOR_8, Freq, value);
   }
-    
 }
 
-
-void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms){
+void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms)
+{
 
   servo_angle(angulo1, 1);
   servo_angle(angulo2, 2);
@@ -188,23 +167,20 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
   servo_angle(angulo8, 8);
 
   delay(delayms);
-
-
 }
 
-void anda_frente(){
+void anda_frente()
+{
 
-  recebe_angulos(90,90,90,90,20,20,20,20,200);
-  recebe_angulos(90,90,45,90,20,0,0,20,200);
-  recebe_angulos(90,90,45,90,20,20,20,20,200);
-  recebe_angulos(90,90,45,90,0,20,20,0,200);
-  recebe_angulos(90,45,90,45,0,20,20,0,200);
-  recebe_angulos(90,45,90,45,20,20,20,20,200);
-  recebe_angulos(90,90,90,45,20,0,0,20,200);
-  recebe_angulos(45,90,90,90,20,0,0,20,200);
-  recebe_angulos(45,90,90,90,20,20,20,20,200);
-  recebe_angulos(45,90,90,90,0,20,20,20,200);
-  recebe_angulos(90,90,90,90,20,20,20,20,200);
-
-
+  recebe_angulos(90, 90, 90, 90, 20, 20, 20, 20, 200); // standby (talvez só deve ser corrido uma vez)
+  recebe_angulos(90, 90, 45, 90, 20, 0, 0, 20, 200);   // leg1, 4 up;  leg4 fw
+  recebe_angulos(90, 90, 45, 90, 20, 20, 20, 20, 200); // leg1, 4 dn;
+  recebe_angulos(90, 90, 45, 90, 0, 20, 20, 0, 200);   // leg2, 3 up;
+  recebe_angulos(90, 45, 90, 45, 0, 20, 20, 0, 200);   // leg1, 4 bk;  leg2 fw
+  recebe_angulos(90, 45, 90, 45, 20, 20, 20, 20, 200); // leg2, 3 dn;
+  recebe_angulos(90, 90, 90, 45, 20, 0, 0, 20, 200);   // leg1, 4 up;  leg1 fw
+  recebe_angulos(45, 90, 90, 90, 20, 0, 0, 20, 200);   // leg2, 3 bk;
+  recebe_angulos(45, 90, 90, 90, 20, 20, 20, 20, 200); // leg1, 4 dn;
+  recebe_angulos(45, 90, 90, 90, 0, 20, 20, 20, 200);  // leg3 up
+  recebe_angulos(90, 90, 90, 90, 20, 20, 20, 20, 200); // leg3 fw dn
 }
