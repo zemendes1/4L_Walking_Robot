@@ -62,10 +62,15 @@ void standby();
 void liedown();
 void standup();
 void dancing();
+void calibra();
+
+float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
+float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
 
 void setup()
 {
   // put your setup code here, to run once:
+  calibra();
 
   PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _90graus_Motor1);
   PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _90graus_Motor2);
@@ -93,80 +98,53 @@ void loop()
 
 void servo_angle(int angle, int motor)
 {
-  
-
-  float m = 0.000f, b = 0.000f;
   float value = 0.000f;
 
   if (motor == 1)
-  { // Cada if faz uma regressão linear mediante os parametros definidos em cima
-    m = (_180graus_Motor1 - _90graus_Motor1);
-    m = m / (180 - 90); // calcula declive
-    b = _90graus_Motor1 - (90*m);  
-    value = m * angle + b; // formato y=mx+b 
+  {
+    value = m1 * angle + b1; // formato y=mx+b 
     PWM_Instance_1A->setPWM(MOTOR_1, Freq, value);
   }
 
   else if (motor == 2)
   {
-    m = (_0graus_Motor2 - _90graus_Motor2);
-    m = m / (0 - 90);
-    b = _0graus_Motor2;
-    value = m * angle + b;
+    value = m2 * angle + b2;
     PWM_Instance_1B->setPWM(MOTOR_2, Freq, value);
   }
 
   else if (motor == 3)
   {
-    m = (_0graus_Motor3 - _90graus_Motor3);
-    m = m / (0 - 90);
-    b = _0graus_Motor3;
-    value = m * angle + b;
+    value = m3 * angle + b3;
     PWM_Instance_6A->setPWM(MOTOR_3, Freq, value);
   }
 
   else if (motor == 4)
   {
-    m = (_180graus_Motor4 - _90graus_Motor4);
-    m = m / (180 - 90); // calcula declive
-    b = _90graus_Motor4 - (90*m);  
-    value = m * angle + b;
+    value = m4 * angle + b4;
     PWM_Instance_6B->setPWM(MOTOR_4, Freq, value);
   }
 
   else if (motor == 5)
   {
-    m = (_180graus_Motor5 - _90graus_Motor5);
-    m = m / (180 - 90); // calcula declive
-    b = _90graus_Motor5 - (90*m);  
-    value = m * angle + b; // formato y=mx+b 
+    value = m5 * angle + b5; // formato y=mx+b 
     PWM_Instance_7A->setPWM(MOTOR_5, Freq, value);
   }
 
   else if (motor == 6)
   {
-    m = (_0graus_Motor6 - _90graus_Motor6);
-    m = m / (0 - 90);
-    b = _0graus_Motor6;
-    value = m * angle + b;
+    value = m6 * angle + b6;
     PWM_Instance_7B->setPWM(MOTOR_6, Freq, value);
   }
 
   else if (motor == 7)
   {
-    m = (_0graus_Motor7 - _90graus_Motor7);
-    m = m / (0 - 90);
-    b = _0graus_Motor7;
-    value = m * angle + b;
+    value = m7 * angle + b7;
     PWM_Instance_0A->setPWM(MOTOR_7, Freq, value);
   }
 
   else if (motor == 8)
   {
-    m = (_180graus_Motor8 - _90graus_Motor8);
-    m = m / (180 - 90); // calcula declive
-    b = _90graus_Motor8 - (90*m);  
-    value = m * angle + b; // formato y=mx+b 
+    value = m8 * angle + b8; 
     PWM_Instance_0B->setPWM(MOTOR_8, Freq, value);
   }
 }
@@ -199,6 +177,7 @@ void move_forward()
   recebe_angulos(135,90,90,90,110,70,70,110,100); // leg1, 4 dn; 
   recebe_angulos(135,90,90,90,90,70,70,110,100); // leg3 up, ; 
   recebe_angulos(90,90,90,90,110,70,70,110,100); // leg3 fw dn, ; 
+
 }
 
 void standby(){
@@ -216,4 +195,40 @@ void standup(){
 void dancing(){
  
 
+}
+
+void calibra()
+{
+  m1 = (_180graus_Motor1 - _90graus_Motor1);
+  m1 = m1 / (180 - 90); // calcula declive
+  b1 = _90graus_Motor1 - (90*m1);  
+
+  m2 = (_0graus_Motor2 - _90graus_Motor2);
+  m2 = m2/ (0 - 90);
+  b2 = _0graus_Motor2;
+  
+  m3 = (_0graus_Motor3 - _90graus_Motor3);
+  m3 = m3 / (0 - 90);
+  b3 = _0graus_Motor3;
+  
+  m4 = (_180graus_Motor4 - _90graus_Motor4);
+  m4 = m4 / (180 - 90); 
+  b4 = _90graus_Motor4 - (90*m4);  
+  
+  m5 = (_180graus_Motor5 - _90graus_Motor5);
+  m5 = m5 / (180 - 90); 
+  b5 = _90graus_Motor5 - (90*m5);  
+  
+  m6 = (_0graus_Motor6 - _90graus_Motor6);
+  m6 = m6 / (0 - 90);
+  b6 = _0graus_Motor6;
+  
+  m7 = (_0graus_Motor7 - _90graus_Motor7);
+  m7 = m7 / (0 - 90);
+  b7 = _0graus_Motor7;
+  
+  m8 = (_180graus_Motor8 - _90graus_Motor8);
+  m8 = m8 / (180 - 90); 
+  b8 = _90graus_Motor8 - (90*m8);  
+  
 }
