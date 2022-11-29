@@ -166,17 +166,18 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-  recebe_angulos(90,90,90,90,110,70,70,110,100); // standby, ; 
-  recebe_angulos(90,90,45,90,110,90,90,110,100); // leg1, 4 up;  leg4 fw
-  recebe_angulos(90,90,45,90,110,70,70,110,100); // leg1, 4 dn; 
-  recebe_angulos(90,90,45,90,90,70,70,90,100); // leg2, 3 up; 
-  recebe_angulos(90,45,90,135,90,70,70,90,100); // leg1, 4 bk;  leg2 fw
-  recebe_angulos(90,45,90,135,110,70,70,110,100); // leg2, 3 dn; 
-  recebe_angulos(90,90,90,135,110,90,90,110,100); // leg1, 4 up;  leg1 fw
-  recebe_angulos(135,90,90,90,110,90,90,110,100); // leg2, 3 bk; 
-  recebe_angulos(135,90,90,90,110,70,70,110,100); // leg1, 4 dn; 
-  recebe_angulos(135,90,90,90,90,70,70,110,100); // leg3 up, ; 
-  recebe_angulos(90,90,90,90,110,70,70,110,100); // leg3 fw dn, ; 
+recebe_angulos(90,90,90,90,110,70,70,110,100); // standby, ; 
+recebe_angulos(90,90,90,135,90,70,70,90,100); // leg1, 4 up;  leg4 fw
+recebe_angulos(90,90,90,135,110,70,70,110,100); // leg1, 4 dn; 
+recebe_angulos(90,90,90,135,110,90,90,110,100); // leg2, 3 up; 
+recebe_angulos(135,45,90,90,110,90,90,110,100); // leg1, 4 bk;  leg2 fw
+recebe_angulos(135,45,90,90,110,70,70,110,100); // leg2, 3 dn; 
+recebe_angulos(90,45,90,90,90,70,70,90,100); // leg1, 4 up;  leg1 fw
+recebe_angulos(90,90,45,90,90,70,70,90,100); // leg2, 3 bk; 
+recebe_angulos(90,90,45,90,110,70,70,110,100); // leg1, 4 dn; 
+recebe_angulos(90,90,45,90,110,70,90,110,100); // leg3 up, ; 
+recebe_angulos(90,90,90,90,110,70,70,110,100); // leg3 fw dn, ; 
+
 
 }
 
