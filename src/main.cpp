@@ -15,8 +15,8 @@
 
 //motores 1 a 4
 
-#define _90graus_Motor1 20.5
-#define _180graus_Motor1 35.167
+#define _90graus_Motor1 20.3
+#define _180graus_Motor1 35.2
 
 #define _0graus_Motor2 19.667
 #define _90graus_Motor2 35.1667
@@ -95,7 +95,9 @@ void loop()
   move_forward();
   //dancing();
   //liedown();
+  //recebe_angulos(90,0,90,0,90,90,90,90,1000);
 
+  //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
   
 }
 
@@ -179,27 +181,24 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-/*
-recebe_angulos(90,90,90,90,110,70,70,110,200); // standby, ; 
-recebe_angulos(90,90,90,135,90,70,70,90,200); // leg1, 4 up;  leg4 fw
-recebe_angulos(90,90,90,135,110,70,70,110,200); // leg1, 4 dn; 
-recebe_angulos(90,90,90,135,110,90,90,110,200); // leg2, 3 up; 
-recebe_angulos(135,45,90,90,110,90,90,110,200); // leg1, 4 bk;  leg2 fw
-recebe_angulos(135,45,90,90,110,70,70,110,200); // leg2, 3 dn; 
-recebe_angulos(90,90,90,90,90,70,70,90,200); // leg1, 4 up;  leg1 fw
-recebe_angulos(90,90,45,90,90,70,70,90,200); // leg2, 3 bk; 
-recebe_angulos(90,90,45,90,110,70,70,110,200); // leg1, 4 dn; 
-recebe_angulos(90,90,45,90,110,70,90,110,200); // leg3 up, ; 
-recebe_angulos(90,90,90,90,110,70,70,110,200); // leg3 fw dn, ; 
 
+
+recebe_angulos(80,100,45,135,90,90,70,110,100);
+recebe_angulos(155,100,45,135,135,90,70,110,100);
+recebe_angulos(135,45,100,155,110,70,90,135,100);
+recebe_angulos(135,45,100,80,110,70,90,90,100);
+recebe_angulos(135,45,25,80,110,70,45,90,100);
+recebe_angulos(80,25,45,135,90,45,90,135,100);
+recebe_angulos(80,100,45,135,90,90,90,135,100);
+/*
+recebe_angulos(80,100,45,135,90,90,70,135,100);
+recebe_angulos(155,100,45,135,135,90,70,135,100);
+recebe_angulos(135,45,100,155,110,70,90,135,100);
+recebe_angulos(135,45,100,80,110,70,90,90,100);
+recebe_angulos(135,45,25,80,110,70,45,90,100);
+recebe_angulos(80,25,45,135,90,45,90,135,100);
+recebe_angulos(80,100,45,135,90,90,90,135,100);
 */
-recebe_angulos(80,100,45,135,90,90,70,110,200);
-recebe_angulos(155,100,45,135,135,90,70,110,200);
-recebe_angulos(135,45,100,155,110,70,90,135,200);
-recebe_angulos(135,45,100,80,110,70,90,90,200);
-recebe_angulos(135,45,25,80,110,70,45,90,200);
-recebe_angulos(80,25,45,135,90,45,90,135,200);
-recebe_angulos(80,100,45,135,90,90,90,135,200);
 
 }
 
