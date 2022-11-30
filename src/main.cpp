@@ -29,17 +29,17 @@
 
 //motores 5 a 8
 
-#define _90graus_Motor5 9.5
-#define _180graus_Motor5 24.8
+#define _90graus_Motor5 24.8
+#define _180graus_Motor5 9.5
 
-#define _0graus_Motor6 21.7
-#define _90graus_Motor6 37
+#define _0graus_Motor6 37
+#define _90graus_Motor6 21.7
 
-#define _0graus_Motor7 22.4
-#define _90graus_Motor7 37.5
+#define _0graus_Motor7 37.5
+#define _90graus_Motor7 22.4
 
-#define _90graus_Motor8 10
-#define _180graus_Motor8 25.3
+#define _90graus_Motor8 25.3
+#define _180graus_Motor8 10
 
 RP2040_PWM *PWM_Instance_1A;
 RP2040_PWM *PWM_Instance_1B;
@@ -183,22 +183,26 @@ void move_forward()
 {
 
 
-recebe_angulos(80,100,45,135,90,90,70,110,100);
-recebe_angulos(155,100,45,135,135,90,70,110,100);
-recebe_angulos(135,45,100,155,110,70,90,135,100);
-recebe_angulos(135,45,100,80,110,70,90,90,100);
-recebe_angulos(135,45,25,80,110,70,45,90,100);
-recebe_angulos(80,25,45,135,90,45,90,135,100);
-recebe_angulos(80,100,45,135,90,90,90,135,100);
+//codigo que funcionou na aula
+recebe_angulos(80,100,45,135,180,0,20,170,100);
+recebe_angulos(155,100,45,135,135,0,20,170,100);
+recebe_angulos(135,45,100,155,170,20,0,135,100);
+recebe_angulos(135,45,100,80,170,20,0,180,100);
+recebe_angulos(135,45,25,80,170,20,45,180,100);
+recebe_angulos(80,25,45,135,180,45,0,45,100);
+recebe_angulos(80,100,45,135,180,0,0,45,100);
 /*
-recebe_angulos(80,100,45,135,90,90,70,135,100);
-recebe_angulos(155,100,45,135,135,90,70,135,100);
-recebe_angulos(135,45,100,155,110,70,90,135,100);
-recebe_angulos(135,45,100,80,110,70,90,90,100);
-recebe_angulos(135,45,25,80,110,70,45,90,100);
-recebe_angulos(80,25,45,135,90,45,90,135,100);
-recebe_angulos(80,100,45,135,90,90,90,135,100);
+recebe_angulos(80,100,45,135,180,0,20,170,100);
+recebe_angulos(155,100,45,135,135,0,20,170,100);
+recebe_angulos(135,45,100,155,170,20,0,135,100);
+recebe_angulos(135,45,100,80,170,20,0,180,100);
+recebe_angulos(135,45,25,80,170,20,45,180,100);
+recebe_angulos(80,25,45,135,180,45,20,170,100);
+recebe_angulos(80,100,45,135,180,0,20,170,100);
+
 */
+
+
 
 }
 
