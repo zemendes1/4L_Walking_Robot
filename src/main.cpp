@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <RP2040_PWM.h>
+#include <WiFi.h>
 
 #define MOTOR_1 2
 #define MOTOR_2 3
@@ -70,12 +71,39 @@ void dancing();
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
 
+const char* ssid = "MEO-F44E90";
+const char* password = "de6ee7ea05";
+
 void setup()
 {
   // put your setup code here, to run once:
-  calibra();
+  //calibra();
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _180graus_Motor1);
+  Serial.begin(115200);
+ 
+  // Operate in WiFi Station mode
+  WiFi.mode(WIFI_STA);
+ 
+  // Start WiFi with supplied parameters
+  WiFi.begin(ssid, password);
+ 
+  // Print periods on monitor while establishing connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    delay(500);
+  }
+ 
+  // Connection established
+  Serial.println("");
+  Serial.print("Pico W is connected to WiFi network ");
+  Serial.println(WiFi.SSID());
+ 
+  // Print IP Address
+  Serial.print("Assigned IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  /*PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _180graus_Motor1);
   PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _90graus_Motor2);
 
   PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _90graus_Motor3);
@@ -85,19 +113,25 @@ void setup()
   PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _90graus_Motor6);
 
   PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _90graus_Motor7);
-  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _90graus_Motor8);
+  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _90graus_Motor8);*/
+  pinMode(6,OUTPUT);
 }
 
 void loop()
 {   
   //standup();
   //standby();
-  move_forward();
+  //move_forward();
   //dancing();
   //liedown();
   //recebe_angulos(90,0,90,0,90,90,90,90,1000);
 
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
+
+  digitalWrite(6,HIGH);
+  delay(1000);
+  digitalWrite(6,HIGH);
+  delay(1000);
   
 }
 
