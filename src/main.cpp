@@ -124,7 +124,7 @@ void loop()
   //move_forward();
   //dancing();
   //liedown();
-  //recebe_angulos(90,0,90,0,90,90,90,90,1000);
+  //recebe_angulos(180,0,-10,180,180,0,0,180,1000);
 
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
 
@@ -136,7 +136,7 @@ void loop()
 }
 
 void servo_angle(int angle, int motor)
-{ 
+{ /*
   if(motor==1 || motor==4 || motor==5 || motor==8){
     if(angle < 80 || angle > 180){
       return;
@@ -146,7 +146,7 @@ void servo_angle(int angle, int motor)
     if(angle < 0 || angle > 100){
       return;
     }
-  }
+  }*/
   float value = 0.000f;
 
   if (motor == 1)
@@ -215,7 +215,7 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-
+/*
 
 //codigo que funcionou na aula
 recebe_angulos(80,100,45,135,180,0,20,170,100);
@@ -224,18 +224,16 @@ recebe_angulos(135,45,100,155,170,20,0,135,100);
 recebe_angulos(135,45,100,80,170,20,0,180,100);
 recebe_angulos(135,45,25,80,170,20,45,180,100);
 recebe_angulos(80,25,45,135,180,45,0,45,100);
-recebe_angulos(80,100,45,135,180,0,0,45,100);
-/*
-recebe_angulos(80,100,45,135,180,0,20,170,100);
-recebe_angulos(155,100,45,135,135,0,20,170,100);
-recebe_angulos(135,45,100,155,170,20,0,135,100);
-recebe_angulos(135,45,100,80,170,20,0,180,100);
-recebe_angulos(135,45,25,80,170,20,45,180,100);
-recebe_angulos(80,25,45,135,180,45,20,170,100);
-recebe_angulos(80,100,45,135,180,0,20,170,100);
+recebe_angulos(80,100,45,135,180,0,0,45,100);*/
 
-*/
-
+//codigo de casa
+recebe_angulos(80,100,45,135,180,0,20,170,300);
+recebe_angulos(155,100,45,135,135,0,20,170,300);
+recebe_angulos(135,45,100,155,170,20,0,135,300);
+recebe_angulos(135,45,100,80,170,20,0,180,300);
+recebe_angulos(135,45,25,80,170,20,45,180,300);
+recebe_angulos(80,25,45,135,180,45,20,170,300);
+recebe_angulos(80,100,45,135,180,0,20,170,300);
 
 
 }
