@@ -52,7 +52,10 @@ RP2040_PWM *PWM_Instance_0B;
 
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
-void move_forward();// por faser
+void calibra();
+
+// Por fazer
+void move_forward();
 void move_backwards();
 void move_left();
 void move_right();
@@ -62,7 +65,7 @@ void standby();
 void liedown();
 void standup();
 void dancing();
-void calibra();
+
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
@@ -72,17 +75,17 @@ void setup()
   // put your setup code here, to run once:
   calibra();
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _90graus_Motor1);
+  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _180graus_Motor1);
   PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _90graus_Motor2);
 
   PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _90graus_Motor3);
-  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _90graus_Motor4);
+  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _180graus_Motor4);
 
-  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _180graus_Motor5);
-  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _0graus_Motor6);
+  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _90graus_Motor5);
+  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _90graus_Motor6);
 
-  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _0graus_Motor7);
-  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _180graus_Motor8);
+  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _90graus_Motor7);
+  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _90graus_Motor8);
 }
 
 void loop()
@@ -97,7 +100,17 @@ void loop()
 }
 
 void servo_angle(int angle, int motor)
-{
+{ 
+  if(motor==1 || motor==4 || motor==5 || motor==8){
+    if(angle < 80 || angle > 180){
+      return;
+    }
+  }
+  if(motor==2 || motor==3 || motor==6 || motor==7){
+    if(angle < 0 || angle > 100){
+      return;
+    }
+  }
   float value = 0.000f;
 
   if (motor == 1)
@@ -166,18 +179,27 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-recebe_angulos(90,90,90,90,110,70,70,110,100); // standby, ; 
-recebe_angulos(90,90,90,135,90,70,70,90,100); // leg1, 4 up;  leg4 fw
-recebe_angulos(90,90,90,135,110,70,70,110,100); // leg1, 4 dn; 
-recebe_angulos(90,90,90,135,110,90,90,110,100); // leg2, 3 up; 
-recebe_angulos(135,45,90,90,110,90,90,110,100); // leg1, 4 bk;  leg2 fw
-recebe_angulos(135,45,90,90,110,70,70,110,100); // leg2, 3 dn; 
-recebe_angulos(90,45,90,90,90,70,70,90,100); // leg1, 4 up;  leg1 fw
-recebe_angulos(90,90,45,90,90,70,70,90,100); // leg2, 3 bk; 
-recebe_angulos(90,90,45,90,110,70,70,110,100); // leg1, 4 dn; 
-recebe_angulos(90,90,45,90,110,70,90,110,100); // leg3 up, ; 
-recebe_angulos(90,90,90,90,110,70,70,110,100); // leg3 fw dn, ; 
+/*
+recebe_angulos(90,90,90,90,110,70,70,110,200); // standby, ; 
+recebe_angulos(90,90,90,135,90,70,70,90,200); // leg1, 4 up;  leg4 fw
+recebe_angulos(90,90,90,135,110,70,70,110,200); // leg1, 4 dn; 
+recebe_angulos(90,90,90,135,110,90,90,110,200); // leg2, 3 up; 
+recebe_angulos(135,45,90,90,110,90,90,110,200); // leg1, 4 bk;  leg2 fw
+recebe_angulos(135,45,90,90,110,70,70,110,200); // leg2, 3 dn; 
+recebe_angulos(90,90,90,90,90,70,70,90,200); // leg1, 4 up;  leg1 fw
+recebe_angulos(90,90,45,90,90,70,70,90,200); // leg2, 3 bk; 
+recebe_angulos(90,90,45,90,110,70,70,110,200); // leg1, 4 dn; 
+recebe_angulos(90,90,45,90,110,70,90,110,200); // leg3 up, ; 
+recebe_angulos(90,90,90,90,110,70,70,110,200); // leg3 fw dn, ; 
 
+*/
+recebe_angulos(80,100,45,135,90,90,70,110,200);
+recebe_angulos(155,100,45,135,135,90,70,110,200);
+recebe_angulos(135,45,100,155,110,70,90,135,200);
+recebe_angulos(135,45,100,80,110,70,90,90,200);
+recebe_angulos(135,45,25,80,110,70,45,90,200);
+recebe_angulos(80,25,45,135,90,45,90,135,200);
+recebe_angulos(80,100,45,135,90,90,90,135,200);
 
 }
 
