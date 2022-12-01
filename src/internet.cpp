@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <RP2040_PWM.h>
@@ -9,8 +8,6 @@
 
 const char* ssid = "MEO-F44E90";
 const char* password = "de6ee7ea05";
-
-
 
 
 // Set web server port number to 80
@@ -32,7 +29,7 @@ const long timeoutTime = 2000;
 
 
 void conecta_wifi(){
-    // Start Serial Monitor
+  // Start Serial Monitor
   Serial.begin(115200);
  
   // Initialize the LED as an output

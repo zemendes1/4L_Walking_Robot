@@ -4,6 +4,7 @@
 #include <WiFi.h>
 
 #include "internet.h"
+#include "sensor.h"
 
 #define MOTOR_1 2
 #define MOTOR_2 3
@@ -74,24 +75,28 @@ float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.00
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
 
 
+
 void setup()
 {
   // put your setup code here, to run once:
   calibra();
 
-  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _180graus_Motor1);
+  PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _90graus_Motor1);
   PWM_Instance_1B = new RP2040_PWM(MOTOR_2, Freq, _90graus_Motor2);
 
   PWM_Instance_6A = new RP2040_PWM(MOTOR_3, Freq, _90graus_Motor3);
-  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _180graus_Motor4);
+  PWM_Instance_6B = new RP2040_PWM(MOTOR_4, Freq, _90graus_Motor4);
 
-  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _90graus_Motor5);
-  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _90graus_Motor6);
+  PWM_Instance_7A = new RP2040_PWM(MOTOR_5, Freq, _180graus_Motor5);
+  PWM_Instance_7B = new RP2040_PWM(MOTOR_6, Freq, _0graus_Motor6);
 
-  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _90graus_Motor7);
-  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _90graus_Motor8);
+  PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _0graus_Motor7);
+  PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _180graus_Motor8);
 
-  conecta_wifi();
+  //conecta_wifi();
+  //ultrasom_setup();
+
+
   
 }
 
@@ -102,12 +107,12 @@ void loop()
   move_forward();
   //dancing();
   //liedown();
-  //recebe_angulos(180,0,-10,180,180,0,0,180,1000);
-
+  
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
 
-  conexao_html();
-  
+  //conexao_html();
+  //ultrasom_loop();
+
 }
 
 void servo_angle(int angle, int motor)
@@ -190,7 +195,7 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-/*
+
 
 //codigo que funcionou na aula
 recebe_angulos(80,100,45,135,180,0,20,170,100);
@@ -198,17 +203,20 @@ recebe_angulos(155,100,45,135,135,0,20,170,100);
 recebe_angulos(135,45,100,155,170,20,0,135,100);
 recebe_angulos(135,45,100,80,170,20,0,180,100);
 recebe_angulos(135,45,25,80,170,20,45,180,100);
-recebe_angulos(80,25,45,135,180,45,0,45,100);
-recebe_angulos(80,100,45,135,180,0,0,45,100);*/
-
+recebe_angulos(80,25,45,135,180,45,0,135,100);
+recebe_angulos(80,100,45,135,180,0,0,135,100);
+/*
 //codigo de casa
-recebe_angulos(80,100,45,135,180,0,20,170,300);
-recebe_angulos(155,100,45,135,135,0,20,170,300);
-recebe_angulos(135,45,100,155,170,20,0,135,300);
-recebe_angulos(135,45,100,80,170,20,0,180,300);
-recebe_angulos(135,45,25,80,170,20,45,180,300);
-recebe_angulos(80,25,45,135,180,45,20,170,300);
-recebe_angulos(80,100,45,135,180,0,20,170,300);
+recebe_angulos(80,100,45,135,180,0,20,170,100);
+recebe_angulos(155,100,45,135,135,0,20,170,100);
+recebe_angulos(135,45,100,155,170,20,0,135,100);
+recebe_angulos(135,45,100,80,170,20,0,180,100);
+recebe_angulos(135,45,25,80,170,20,45,180,100);
+recebe_angulos(80,25,45,135,180,45,20,170,100);
+recebe_angulos(80,100,45,135,180,0,20,170,100);
+*/
+
+
 
 
 }
