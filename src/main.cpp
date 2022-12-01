@@ -96,7 +96,7 @@ void setup()
   //conecta_wifi();
   //ultrasom_setup();
 
-
+  delay(5000);
   
 }
 
@@ -196,7 +196,7 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 void move_forward()
 {
 
-
+/*
 //codigo que funcionou na aula
 recebe_angulos(80,100,45,135,180,0,20,170,100);
 recebe_angulos(155,100,45,135,135,0,20,170,100);
@@ -205,7 +205,7 @@ recebe_angulos(135,45,100,80,170,20,0,180,100);
 recebe_angulos(135,45,25,80,170,20,45,180,100);
 recebe_angulos(80,25,45,135,180,45,0,135,100);
 recebe_angulos(80,100,45,135,180,0,0,135,100);
-/*
+
 //codigo de casa
 recebe_angulos(80,100,45,135,180,0,20,170,100);
 recebe_angulos(155,100,45,135,135,0,20,170,100);
@@ -215,6 +215,16 @@ recebe_angulos(135,45,25,80,170,20,45,180,100);
 recebe_angulos(80,25,45,135,180,45,20,170,100);
 recebe_angulos(80,100,45,135,180,0,20,170,100);
 */
+
+recebe_angulos(135,-11,45,191,152,6,28,173,100);
+recebe_angulos(135,66,45,191,152,63,28,173,100);
+recebe_angulos(191,45,66,135,174,28,63,152,100);
+recebe_angulos(191,45,-11,135,174,28,6,152,100);
+recebe_angulos(114,45,-11,135,116,28,6,152,100);
+recebe_angulos(135,-11,45,114,152,6,28,116,100);
+recebe_angulos(135,-11,45,191,152,6,28,173,100);
+
+
 
 
 
