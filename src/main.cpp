@@ -39,8 +39,8 @@
 #define _0graus_Motor6 37
 #define _90graus_Motor6 21.7
 
-#define _0graus_Motor7 37
-#define _90graus_Motor7 22
+#define _0graus_Motor7 22.5
+#define _90graus_Motor7 7
 
 #define _90graus_Motor8 25.3
 #define _180graus_Motor8 10
