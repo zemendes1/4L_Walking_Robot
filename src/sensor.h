@@ -8,7 +8,7 @@
 
 
 extern long duration;
-extern int distance;
+extern float distance;
 
 void ultrasom_setup();
 void ultrasom_loop();

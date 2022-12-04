@@ -93,8 +93,10 @@ void setup()
   PWM_Instance_0A = new RP2040_PWM(MOTOR_7, Freq, _0graus_Motor7);
   PWM_Instance_0B = new RP2040_PWM(MOTOR_8, Freq, _180graus_Motor8);
 
+  Serial.begin(9600); // Starts the serial communication
+
   //conecta_wifi();
-  //ultrasom_setup();
+  ultrasom_setup();
 
 
   
@@ -112,7 +114,7 @@ void loop()
   
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
 
-
+  
   //conexao_html();
   //ultrasom_loop();
   
