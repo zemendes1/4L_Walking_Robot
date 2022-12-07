@@ -98,8 +98,8 @@ void setup()
   Serial.begin(9600); // Starts the serial communication
 
   //conecta_wifi();
-  ultrasom_setup();
-
+  //sonar_setup();
+  tof_setup();
 
   
 }
@@ -113,14 +113,15 @@ void loop()
   //dancing();
   //liedown();
   //turn_left();
-  turn_right();
+  //turn_right();
 
   
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
 
   
   //conexao_html();
-  //ultrasom_loop();
+  //sonar_loop();
+  tof_loop();
   
 }
 
