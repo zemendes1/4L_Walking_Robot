@@ -5,16 +5,17 @@
 #include "pico/cyw43_arch.h"
 #include <Wire.h>
 #include <VL53L0X.h>
+#include <HCSR04.h>
 
 // defines pins numbers
-#define trigPin 27 
+#define triggerPin 27 
 #define echoPin 28
 
+#define sda_tof 8 
+#define scl_tof 9
 
-extern long duration;
 extern float distance_sonar;
 
-extern VL53L0X tof;
 extern float distance_tof, prev_distance_tof;
 
 void sonar_setup();
