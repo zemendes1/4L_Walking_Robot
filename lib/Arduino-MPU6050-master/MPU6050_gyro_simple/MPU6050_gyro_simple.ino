@@ -1,86 +1,20 @@
-#include <Arduino.h>
-#include <Wire.h>
+/*
+    MPU6050 Triple Axis Gyroscope & Accelerometer. Simple Gyroscope Example.
+    Read more: http://www.jarzebski.pl/arduino/czujniki-i-sensory/3-osiowy-zyroskop-i-akcelerometr-mpu6050.html
+    GIT: https://github.com/jarzebski/Arduino-MPU6050
+    Web: http://www.jarzebski.pl
+    (c) 2014 by Korneliusz Jarzebski
+*/
 
-#include <VL53L0X.h>
-#include <HCSR04.h>
+#include <Wire.h>
 #include <MPU6050.h>
 
-#include "sensor.h"
+MPU6050 mpu;
 
+void setup() 
+{
+  Serial.begin(115200);
 
-
-//Ultrasom
-UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
-float distance_sonar=0.000f;
-
-//TOF
-VL53L0X tof;
-float distance_tof=0.000f, prev_distance_tof=0.000f;
-
-//MPU
-MPU6050	mpu;
-
-void sonar_setup () {
-  
-}
-
-void sonar_loop () {
-  // Print the distance in centimeters
-  distance_sonar = distanceSensor.measureDistanceCm();
-  Serial.print("Distance_sonar: ");
-  Serial.println(distance_sonar,3);
-  
-}
-
-
-
-void tof_setup() {
- 
-  Wire.setSDA(sda_tof);//GPIO8
-  Wire.setSCL(scl_tof);//GPIO9
-
-  Wire.begin();
-
-
-  tof.setTimeout(500);
-  while (!tof.init()) {
-    Serial.println(F("Failed to detect and initialize VL53L0X!"));
-    delay(100);
-  }  
-
-  // Reduce timing budget to 20 ms (default is about 33 ms)
-  tof.setMeasurementTimingBudget(20000);
-
-  // Start new distance measure
-  tof.startReadRangeMillimeters();  
-
-}
-
-void tof_loop() {
-
-  if (tof.readRangeAvailable()) {
-    prev_distance_tof = distance_tof;
-    distance_tof = tof.readRangeMillimeters() * 0.1;
-
-     
-    // Start new distance measure
-    tof.startReadRangeMillimeters(); 
-
-    //Debug distance_tof
-    Serial.print("Distance_tof: ");
-    Serial.println(distance_tof, 3);
-
-  }
- 
-}
-
-//Utilizei um exemplo de gyroscope mas há mais opções (temperatura, aceleração, etc)
-void imu_setup() {
-
-  Wire1.setSDA(7);//GPIO20
-  Wire1.setSCL(6);//GPIO21
-
-  Wire.begin();
   // Initialize MPU6050
   Serial.println("Initialize MPU6050");
   while(!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G))
@@ -103,31 +37,10 @@ void imu_setup() {
   mpu.setThreshold(3);
   
   // Check settings
-  imu_checkSettings();
-
+  checkSettings();
 }
 
-void imu_loop () {
-  Vector rawGyro = mpu.readRawGyro();
-  Vector normGyro = mpu.readNormalizeGyro();
-
-  Serial.print(" Xraw = ");
-  Serial.print(rawGyro.XAxis);
-  Serial.print(" Yraw = ");
-  Serial.print(rawGyro.YAxis);
-  Serial.print(" Zraw = ");
-  Serial.println(rawGyro.ZAxis);
-
-  Serial.print(" Xnorm = ");
-  Serial.print(normGyro.XAxis);
-  Serial.print(" Ynorm = ");
-  Serial.print(normGyro.YAxis);
-  Serial.print(" Znorm = ");
-  Serial.println(normGyro.ZAxis);
-}
-
-
-void imu_checkSettings()
+void checkSettings()
 {
   Serial.println();
   
@@ -164,3 +77,27 @@ void imu_checkSettings()
   
   Serial.println();
 }
+
+void loop()
+{
+  Vector rawGyro = mpu.readRawGyro();
+  Vector normGyro = mpu.readNormalizeGyro();
+
+  Serial.print(" Xraw = ");
+  Serial.print(rawGyro.XAxis);
+  Serial.print(" Yraw = ");
+  Serial.print(rawGyro.YAxis);
+  Serial.print(" Zraw = ");
+  Serial.println(rawGyro.ZAxis);
+
+  Serial.print(" Xnorm = ");
+  Serial.print(normGyro.XAxis);
+  Serial.print(" Ynorm = ");
+  Serial.print(normGyro.YAxis);
+  Serial.print(" Znorm = ");
+  Serial.println(normGyro.ZAxis);
+  
+  delay(10);
+}
+
+

@@ -30,5 +30,6 @@ void tof_loop();
 
 void imu_setup();
 void imu_loop();
+void imu_checkSettings();
 
 #endif
