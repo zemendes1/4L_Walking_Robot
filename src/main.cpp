@@ -100,7 +100,7 @@ void setup()
   //conecta_wifi();
   //sonar_setup();
   //tof_setup();
-  imu_setup();
+  //imu_setup();
 
   
 }
@@ -123,7 +123,7 @@ void loop()
   //conexao_html();
   //sonar_loop();
   //tof_loop();
-  imu_loop();
+  //imu_loop();
 
   delay(500);
   

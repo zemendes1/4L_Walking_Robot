@@ -77,8 +77,8 @@ void tof_loop() {
 //Utilizei um exemplo de gyroscope mas há mais opções (temperatura, aceleração, etc)
 void imu_setup() {
 
-  Wire1.setSDA(7);//GPIO20
-  Wire1.setSCL(6);//GPIO21
+  Wire.setSDA(7);//GPIO20
+  Wire.setSCL(6);//GPIO21
 
   Wire.begin();
   // Initialize MPU6050
