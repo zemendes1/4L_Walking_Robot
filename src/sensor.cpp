@@ -1,16 +1,22 @@
 #include <Arduino.h>
-#include "sensor.h"
-
-//#include "pico/cyw43_arch.h"
 #include <Wire.h>
+
 #include <VL53L0X.h>
 #include <HCSR04.h>
+#include <MPU6050.h>
 
+#include "sensor.h"
+
+//Ultrasom
 UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
 float distance_sonar=0.000f;
 
+//TOF
 VL53L0X tof;
 float distance_tof=0.000f, prev_distance_tof=0.000f;
+
+//MPU
+//MPU6050	mpu;
 
 void sonar_setup () {
   
@@ -66,3 +72,14 @@ void tof_loop() {
  
 }
 
+//Utilizei um exemplo de gyroscope mas há mais opções (temperatura, aceleração, etc)
+void imu_setup() {
+
+ 
+}
+
+void imu_loop () {
+ 
+  
+  
+}

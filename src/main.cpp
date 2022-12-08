@@ -98,8 +98,9 @@ void setup()
   Serial.begin(9600); // Starts the serial communication
 
   //conecta_wifi();
-  sonar_setup();
-  tof_setup();
+  //sonar_setup();
+  //tof_setup();
+  imu_setup();
 
   
 }
@@ -120,9 +121,9 @@ void loop()
 
   
   //conexao_html();
-  sonar_loop();
-  tof_loop();
-  Serial.println();
+  //sonar_loop();
+  //tof_loop();
+  imu_loop();
 
   delay(500);
   
