@@ -318,13 +318,13 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 void move_forward()
 {
 
-  recebe_angulos(135,-11,45,191,152,6,28,173,100);
-  recebe_angulos(135,66,45,191,152,63,28,173,100);
-  recebe_angulos(191,45,66,135,174,28,63,152,100);
-  recebe_angulos(191,45,-11,135,174,28,6,152,100);
-  recebe_angulos(114,45,-11,135,116,28,6,152,100);
+  recebe_angulos(191,45,-11,135,173,28,6,152,100);
+  recebe_angulos(191,45,66,135,173,28,63,152,100);
+  recebe_angulos(135,66,45,191,152,63,28,174,100);
+  recebe_angulos(135,-11,45,191,152,6,28,174,100);
   recebe_angulos(135,-11,45,114,152,6,28,116,100);
-  recebe_angulos(135,-11,45,191,152,6,28,173,100);
+  recebe_angulos(114,45,-11,135,116,28,6,152,100);
+  recebe_angulos(191,45,-11,135,173,28,6,152,100);
 
 }
 
