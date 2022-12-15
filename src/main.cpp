@@ -71,6 +71,41 @@ void standup();
 void dancing();
 
 
+int numero_voltas = 0;
+int contador_distancia = 0;
+unsigned long t_left;
+
+
+typedef struct {
+  int state, new_state;
+  // tes - time entering state
+  // tis - time in state
+  unsigned long tes, tis;
+} fsm_t;
+
+// Input variables
+uint8_t S1, prevS1;
+uint8_t S2, prevS2;
+
+unsigned long S1_time , S2_time;
+
+// Our finite state machines
+fsm_t fsm1, fsm2;
+
+unsigned long interval, last_cycle;
+unsigned long loop_micros;
+
+// Set new state
+void set_state(fsm_t& fsm, int new_state)
+{
+  if (fsm.state != new_state) {  // if the state chnanged tis is reset
+    fsm.state = new_state;
+    fsm.tes = millis();
+    fsm.tis = 0;
+  }
+}
+
+
 
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
@@ -97,8 +132,11 @@ void setup()
 
   Serial.begin(9600); // Starts the serial communication
 
+  interval = 10;
+  set_state(fsm1, 0);
+
   //conecta_wifi();
-  //sonar_setup();
+  sonar_setup();
   //tof_setup();
   //imu_setup();
 
@@ -120,11 +158,80 @@ void loop()
   //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
 
   
+
+  
   //conexao_html();
   //sonar_loop();
   //tof_loop();
   //imu_loop();
 
+
+  unsigned long now = millis();
+    if (now - last_cycle > interval) {
+      loop_micros = micros();
+      last_cycle = now;
+      
+      // Read the inputs
+
+
+      unsigned long cur_time = millis();   // Just one call to millis()
+
+      fsm1.tis = cur_time - fsm1.tes;
+
+      if(fsm1.state == 0){
+        fsm1.new_state =1;
+      }
+
+      else if(fsm1.state == 1 && distance_sonar<=18 && contador_distancia==2){
+        fsm1.new_state=2;
+        contador_distancia=0;
+      }
+
+      else if(fsm1.state == 2 && numero_voltas>=2){
+        fsm1.new_state=3;
+      }
+
+      else if(fsm1.state == 3 && distance_sonar<=20){
+        fsm1.new_state=2;
+      }
+
+      else if(fsm1.state == 3 && distance_sonar>20){
+        fsm1.state=1;
+        numero_voltas=0;
+      }
+
+
+
+      if(fsm1.state==0){
+        sonar_loop();
+        standby();
+      }
+      else if(fsm1.state==1){
+        sonar_loop();
+        move_forward();
+        
+      }
+      else if(fsm1.state==2){
+        sonar_loop();
+        turn_right();
+        numero_voltas++;
+      }
+      else if(fsm1.state==3){
+        sonar_loop;
+        standby();
+      }
+
+      set_state(fsm1, fsm1.new_state);
+
+      if(distance_sonar<=18){
+        contador_distancia++;
+
+      }
+      else{
+        contador_distancia=0;
+      }
+
+    }
   delay(500);
   
 }
@@ -289,6 +396,7 @@ void turn_right(){
 }
 
 void standby(){
+  recebe_angulos(180,90,90,180,160,20,20,160,100);
 
 }
 
