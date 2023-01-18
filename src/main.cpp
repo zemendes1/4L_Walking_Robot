@@ -56,7 +56,7 @@ RP2040_PWM *PWM_Instance_0B;
 
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
-void calibra();
+void calibra();void obstacle_turn_right();
 
 
 void move_forward();
@@ -103,7 +103,7 @@ void set_state(fsm_t& fsm, int new_state)
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
-
+int stop_distance=0, move_forward_is_on=0;
 
 void setup()
 {
@@ -132,7 +132,7 @@ void setup()
 
   //tof_setup();
   //imu_setup();
-  
+  stop_distance=15;
 }
 
 void loop()
@@ -151,14 +151,15 @@ void loop()
   //tof_loop();
   //imu_loop();
   
-  obstacle_turn_right(28);
+  obstacle_turn_right();
 
 }
 
-void obstacle_turn_right(int measured_distance)
+void obstacle_turn_right()
 { 
-  if(distance_sonar<measured_distance){
-    turn_right();
+  sonar_loop();
+  if(distance_sonar<stop_distance){
+    move_right();
   }
   else{
     move_forward();
@@ -232,7 +233,9 @@ void servo_angle(int angle, int motor)
 
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms)
 {
-
+  if(move_forward_is_on && distance_sonar < stop_distance){
+    return;
+  }
   servo_angle(angulo1, 1);
   servo_angle(angulo2, 2);
   servo_angle(angulo3, 3);
@@ -247,7 +250,7 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
 
 void move_forward()
 {
-
+  move_forward_is_on=1;
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   recebe_angulos(191,45,66,135,173,28,63,152,100);
   recebe_angulos(135,66,45,191,152,63,28,174,100);
@@ -255,7 +258,7 @@ void move_forward()
   recebe_angulos(135,-11,45,114,152,6,28,116,100);
   recebe_angulos(114,45,-11,135,116,28,6,152,100);
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
-
+  move_forward_is_on=0;
 }
 
 void move_backwards(){
