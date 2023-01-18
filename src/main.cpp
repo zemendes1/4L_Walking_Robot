@@ -68,13 +68,7 @@ void turn_right();
 void liedown();
 void standup();
 
-
-
-int numero_voltas = 0;
-int contador_distancia = 0;
-unsigned long t_left;
-
-
+/*
 typedef struct {
   int state, new_state;
   // tes - time entering state
@@ -82,17 +76,19 @@ typedef struct {
   unsigned long tes, tis;
 } fsm_t;
 
+// Our finite state machines
+fsm_t fsm1, fsm2;
+
 // Input variables
 uint8_t S1, prevS1;
 uint8_t S2, prevS2;
 
 unsigned long S1_time , S2_time;
 
-// Our finite state machines
-fsm_t fsm1, fsm2;
 
 unsigned long interval, last_cycle;
 unsigned long loop_micros;
+
 
 // Set new state
 void set_state(fsm_t& fsm, int new_state)
@@ -102,7 +98,7 @@ void set_state(fsm_t& fsm, int new_state)
     fsm.tes = millis();
     fsm.tis = 0;
   }
-}
+}*/
 
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
@@ -128,8 +124,8 @@ void setup()
 
   Serial.begin(9600); // Starts the serial communication
 
-  interval = 10;
-  set_state(fsm1, 0);
+  /*interval = 10;
+  set_state(fsm1, 0);*/
 
   //conecta_wifi();
   sonar_setup();
@@ -141,6 +137,8 @@ void setup()
 
 void loop()
 {   
+  sonar_loop();
+
   //standup();
   //liedown();
   //move_forward();
@@ -152,17 +150,19 @@ void loop()
   //sonar_loop();
   //tof_loop();
   //imu_loop();
-  sonar_loop();
+  
+  obstacle_turn_right(28);
 
-  if(distance_sonar<28){
+}
+
+void obstacle_turn_right(int measured_distance)
+{ 
+  if(distance_sonar<measured_distance){
     turn_right();
   }
   else{
     move_forward();
   }
-  
-  
-
 }
 
 void servo_angle(int angle, int motor)
