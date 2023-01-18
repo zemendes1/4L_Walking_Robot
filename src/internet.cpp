@@ -6,8 +6,8 @@
 #include "internet.h"
 
 
-const char* ssid = "MEO-F44E90";
-const char* password = "de6ee7ea05";
+const char* ssid = "C:Virus.exe";
+const char* password = "Donald1Trump2";
 
 
 // Set web server port number to 80

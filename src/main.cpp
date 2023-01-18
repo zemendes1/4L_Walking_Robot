@@ -58,17 +58,16 @@ void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
 void calibra();
 
-// Por fazer
+
 void move_forward();
 void move_backwards();
 void move_left();
 void move_right();
 void turn_left();
 void turn_right();
-void standby();
 void liedown();
 void standup();
-void dancing();
+
 
 
 int numero_voltas = 0;
@@ -106,11 +105,8 @@ void set_state(fsm_t& fsm, int new_state)
 }
 
 
-
-
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
-
 
 
 void setup()
@@ -137,117 +133,51 @@ void setup()
 
   //conecta_wifi();
   sonar_setup();
+
   //tof_setup();
   //imu_setup();
-
   
 }
 
 void loop()
 {   
   //standup();
-  //standby();
+  //liedown();
   //move_forward();
   //move_right();
-  //dancing();
-  //liedown();
   //turn_left();
   //turn_right();
 
-  
-  //PWM_Instance_1A->setPWM(MOTOR_1, Freq, 20.3);
-
-  
-
-  
   //conexao_html();
   //sonar_loop();
   //tof_loop();
   //imu_loop();
+  sonar_loop();
 
-
-  unsigned long now = millis();
-    if (now - last_cycle > interval) {
-      loop_micros = micros();
-      last_cycle = now;
-      
-      // Read the inputs
-
-
-      unsigned long cur_time = millis();   // Just one call to millis()
-
-      fsm1.tis = cur_time - fsm1.tes;
-
-      if(fsm1.state == 0){
-        fsm1.new_state =1;
-      }
-
-      else if(fsm1.state == 1 && distance_sonar<=18 && contador_distancia==2){
-        fsm1.new_state=2;
-        contador_distancia=0;
-      }
-
-      else if(fsm1.state == 2 && numero_voltas>=2){
-        fsm1.new_state=3;
-      }
-
-      else if(fsm1.state == 3 && distance_sonar<=20){
-        fsm1.new_state=2;
-      }
-
-      else if(fsm1.state == 3 && distance_sonar>20){
-        fsm1.state=1;
-        numero_voltas=0;
-      }
-
-
-
-      if(fsm1.state==0){
-        sonar_loop();
-        standby();
-      }
-      else if(fsm1.state==1){
-        sonar_loop();
-        move_forward();
-        
-      }
-      else if(fsm1.state==2){
-        sonar_loop();
-        turn_right();
-        numero_voltas++;
-      }
-      else if(fsm1.state==3){
-        sonar_loop;
-        standby();
-      }
-
-      set_state(fsm1, fsm1.new_state);
-
-      if(distance_sonar<=18){
-        contador_distancia++;
-
-      }
-      else{
-        contador_distancia=0;
-      }
-
-    }
-  delay(500);
+  if(distance_sonar<28){
+    turn_right();
+  }
+  else{
+    move_forward();
+  }
   
+  
+
 }
 
 void servo_angle(int angle, int motor)
-{ /*
+{ 
   if(motor==1 || motor==4 || motor==5 || motor==8){
-    if(angle < 80 || angle > 180){
+    if(angle < 75 || angle > 195){
       return;
     }
   }
   if(motor==2 || motor==3 || motor==6 || motor==7){
-    if(angle < 0 || angle > 100){
+    if(angle < -15 || angle > 105){
       return;
     }
-  }*/
+  }
+
   float value = 0.000f;
 
   if (motor == 1)
@@ -337,37 +267,17 @@ void move_backwards(){
   recebe_angulos(135,-11,45,114,152,6,28,116,100);
   recebe_angulos(135,-11,45,191,152,6,28,173,100);
   
-  /*
-  recebe_angulos(135,-11,45,191,152,6,28,173,100);
-  recebe_angulos(135,58,45,191,152,63,28,173,100);
-  recebe_angulos(191,45,58,135,174,28,63,152,100);
-  recebe_angulos(191,45,-11,135,174,28,6,152,100);
-  recebe_angulos(122,45,-11,135,116,28,6,152,100);
-  recebe_angulos(135,-11,45,122,152,6,28,116,100);
-  recebe_angulos(135,-11,45,191,152,6,28,173,100);
-  */
 }
 
 void move_right(){
 
-//codigo que funcionou na aula
-recebe_angulos(80,100,45,135,180,0,20,170,100);
-recebe_angulos(155,100,45,135,135,0,20,170,100);
-recebe_angulos(135,45,100,155,170,20,0,135,100);
-recebe_angulos(135,45,100,80,170,20,0,180,100);
-recebe_angulos(135,45,25,80,170,20,45,180,100);
-recebe_angulos(80,25,45,135,180,45,0,135,100);
-recebe_angulos(80,100,45,135,180,0,0,135,100);
-/*
-//codigo de casa
-recebe_angulos(80,100,45,135,180,0,20,170,100);
-recebe_angulos(155,100,45,135,135,0,20,170,100);
-recebe_angulos(135,45,100,155,170,20,0,135,100);
-recebe_angulos(135,45,100,80,170,20,0,180,100);
-recebe_angulos(135,45,25,80,170,20,45,180,100);
-recebe_angulos(80,25,45,135,180,45,20,170,100);
-recebe_angulos(80,100,45,135,180,0,20,170,100);
-*/
+  recebe_angulos(80,100,45,135,180,0,20,170,100);
+  recebe_angulos(155,100,45,135,135,0,20,170,100);
+  recebe_angulos(135,45,100,155,170,20,0,135,100);
+  recebe_angulos(135,45,100,80,170,20,0,180,100);
+  recebe_angulos(135,45,25,80,170,20,45,180,100);
+  recebe_angulos(80,25,45,135,180,45,0,135,100);
+  recebe_angulos(80,100,45,135,180,0,0,135,100);  
 
 }
 
@@ -405,23 +315,14 @@ void turn_right(){
  
 }
 
-void standby(){
-  recebe_angulos(180,90,90,180,160,20,20,160,100);
-
-}
-
 void liedown(){
-  
+  recebe_angulos(180,90,90,180,160,20,20,160,100);
 }
 
 void standup(){
-  
+  recebe_angulos(180,90,90,180,160,20,20,160,100);
 }
 
-void dancing(){
- 
-
-}
 
 void calibra()
 {
