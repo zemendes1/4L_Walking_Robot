@@ -23,9 +23,6 @@ void sonar_setup () {
 void sonar_loop () {
   // Print the distance in centimeters
   distance_sonar = distanceSensor.measureDistanceCm();
-  Serial.print("Distance_sonar: ");
-  Serial.println(distance_sonar,3);
-  
 }
 
 

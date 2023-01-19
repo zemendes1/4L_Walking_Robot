@@ -231,7 +231,6 @@ void servo_angle(int angle, int motor)
   else if (motor == 8)
   {
     value = m8 * angle + b8; 
-    Serial.println(value);
     PWM_Instance_0B->setPWM(MOTOR_8, Freq, value);
   }
 }
