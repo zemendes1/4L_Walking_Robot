@@ -154,10 +154,10 @@ void loop()
   
   //obstacle_turn_right();
 
-  turn_angulo_definido(-180);
+  turn_angulo_definido(360);
 
 
-  delay(3000);
+  delay(10000);
   
 
   
@@ -314,148 +314,90 @@ void turn_left(){
 void turn_right(){
 
   recebe_angulos(180,90,90,180,160,20,20,160,100);
-
   recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
   recebe_angulos(135,90,90,135,140,20,20,140,100);    //perna 1 e 4 vira
   recebe_angulos(135,90,90,135,160,20,20,160,100);    //perna1 e 4 down
- 
   recebe_angulos(135,90,90,135,160,40,40,160,100);    //perna 2 e 3 up
   recebe_angulos(135,45,45,135,160,40,40,160,100);    //perna 2 e 3 vira
   recebe_angulos(135,45,45,135,160,20,20,160,100);    //perna 2 e 3 down
- 
   recebe_angulos(180,90,90,180,160,20,20,160,100);
  
 
 }
 
 void turn_angulo_definido(int angulo_requerido){
-
-  int ciclo_for;
-  int angulo_move = angulo_requerido*2;
-  if ((angulo_move<=90 && angulo_move>0) || (angulo_move>=-90 && angulo_move<0) ){
-    if(angulo_move>0){
-
-      recebe_angulos(180,90,90,180,160,20,20,160,100);
-
-      recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,20,20,160,100);    //perna1 e 4 down
-    
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,20,20,160,100);    //perna 2 e 3 down
-    
-      recebe_angulos(180,90,90,180,160,20,20,160,100);
-    }
-
-    else if(angulo_move<0){
-
-      recebe_angulos(90,0,0,90,160,20,20,160,100);
-
-      recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,20,20,160,100);    //perna1 e 4 down
-    
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,20,20,160,100);    //perna 2 e 3 down
-    
-      recebe_angulos(90,0,0,90,160,20,20,160,100);
-
-  }
-  }
-  else {
-    int contador=0;
-
-    if(angulo_move>0){
-      while(angulo_move>90){
-        angulo_move = angulo_move-90;
-        contador++;
-
-      }
-    }
-    else if(angulo_move<0){
-      while(angulo_move<-90){
-        angulo_move = angulo_move+90;
-        contador++;
-
-      }
-
-    
-
-     if(angulo_move>0){
-
-      for(int i=0; i<contador;i++){
-
-        recebe_angulos(180,90,90,180,160,20,20,160,100);
-
-        recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-        recebe_angulos(90,90,90,90,140,20,20,140,100);    //perna 1 e 4 vira
-        recebe_angulos(90,90,90,90,160,20,20,160,100);    //perna1 e 4 down
-      
-        recebe_angulos(90,90,90,90,160,40,40,160,100);    //perna 2 e 3 up
-        recebe_angulos(90,0,0,90,160,40,40,160,100);    //perna 2 e 3 vira
-        recebe_angulos(90,0,0,90,160,20,20,160,100);    //perna 2 e 3 down
-      }
-    
-      recebe_angulos(180,90,90,180,160,20,20,160,100);
-
-      recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,20,20,160,100);    //perna1 e 4 down
-    
-      recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,20,20,160,100);    //perna 2 e 3 down
-    
-      recebe_angulos(180,90,90,180,160,20,20,160,100);
-    }
-
-    else if(angulo_move<0){
-
-      for(int i=0;i<contador;i++){
-
-        
-
-        recebe_angulos(90,0,0,90,160,20,20,160,100);
-
-
-        recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-        recebe_angulos(180,0,0,180,140,20,20,140,100);    //perna 1 e 4 vira
-        recebe_angulos(180,0,0,180,160,20,20,160,100);    //perna1 e 4 down
-      
-        recebe_angulos(180,0,0,180,160,40,40,160,100);    //perna 2 e 3 up
-        recebe_angulos(180,90,90,180,160,40,40,160,100);    //perna 2 e 3 vira
-        recebe_angulos(180,90,90,180,160,20,20,160,100);    //perna 2 e 3 down
-      }
-      
-    
-      recebe_angulos(90,0,0,90,160,20,20,160,100);
-      
-
-      recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,20,20,160,100);    //perna1 e 4 down
-      
-      recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,20,20,160,100);    //perna 2 e 3 down
-      
-      
-      recebe_angulos(90,0,0,90,160,20,20,160,100);
-
-  }
-
-
-    
-  }
-
-
   
- 
- 
+  
+  int angulo_move = angulo_requerido*2;
+  uint contador=0;
+  
+  if(angulo_move>0){
+    while(angulo_move>90){
+      angulo_move = angulo_move-90;
+      contador++;
+
+    }
+  }
+
+  else if(angulo_move<0){
+    while(angulo_move<-90){
+      angulo_move = angulo_move+90;
+      contador++;
+
+    }
+  }
+    
+
+  if(angulo_move>0){
+
+    for(int i=0; i<contador;i++){
+
+      recebe_angulos(180,90,90,180,160,20,20,160,100);
+      recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
+      recebe_angulos(90,90,90,90,140,20,20,140,100);    //perna 1 e 4 vira
+      recebe_angulos(90,90,90,90,160,20,20,160,100);    //perna1 e 4 down
+      recebe_angulos(90,90,90,90,160,40,40,160,100);    //perna 2 e 3 up
+      recebe_angulos(90,0,0,90,160,40,40,160,100);    //perna 2 e 3 vira
+      recebe_angulos(90,0,0,90,160,20,20,160,100);    //perna 2 e 3 down
+    }
+    
+    recebe_angulos(180,90,90,180,160,20,20,160,100);
+    recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
+    recebe_angulos(180-angulo_move,90,90,180-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
+    recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,20,20,160,100);    //perna1 e 4 down
+    recebe_angulos(180-angulo_move,90,90,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
+    recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
+    recebe_angulos(180-angulo_move,90-angulo_move,90-angulo_move,180-angulo_move,160,20,20,160,100);    //perna 2 e 3 down
+    recebe_angulos(180,90,90,180,160,20,20,160,100);
+  }
+
+  else if(angulo_move<0){
+
+    for(int i=0;i<contador;i++){
+
+      recebe_angulos(90,0,0,90,160,20,20,160,100);
+      recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
+      recebe_angulos(180,0,0,180,140,20,20,140,100);    //perna 1 e 4 vira
+      recebe_angulos(180,0,0,180,160,20,20,160,100);    //perna1 e 4 down
+      recebe_angulos(180,0,0,180,160,40,40,160,100);    //perna 2 e 3 up
+      recebe_angulos(180,90,90,180,160,40,40,160,100);    //perna 2 e 3 vira
+      recebe_angulos(180,90,90,180,160,20,20,160,100);    //perna 2 e 3 down
+    }
+      
+    
+    recebe_angulos(90,0,0,90,160,20,20,160,100);
+    recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
+    recebe_angulos(90-angulo_move,0,0,90-angulo_move,140,20,20,140,100);    //perna 1 e 4 vira
+    recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,20,20,160,100);    //perna1 e 4 down
+    recebe_angulos(90-angulo_move,0,0,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 up
+    recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,40,40,160,100);    //perna 2 e 3 vira
+    recebe_angulos(90-angulo_move,-angulo_move,-angulo_move,90-angulo_move,160,20,20,160,100);    //perna 2 e 3 down  
+    recebe_angulos(90,0,0,90,160,20,20,160,100);
+
+  }
+
 }
-}
+
 
 
 
