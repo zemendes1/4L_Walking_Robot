@@ -130,9 +130,7 @@ void setup()
 
   //conecta_wifi();
   sonar_setup();
-
-  //tof_setup();
-  //imu_setup();
+  imu_setup();
   stop_distance=15;
 }
 
@@ -149,15 +147,12 @@ void loop()
 
   //conexao_html();
   //sonar_loop();
-  //tof_loop();
-  //imu_loop();
+  imu_loop();
   
   //obstacle_turn_right();
 
-  turn_angulo_definido(-200);
-
-
-  delay(10000);
+  //turn_angulo_definido(-200);
+  //delay(10000);
   
 
   

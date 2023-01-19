@@ -34,8 +34,8 @@ void sonar_loop () {
 //Utilizei um exemplo de gyroscope mas há mais opções (temperatura, aceleração, etc)
 void imu_setup() {
 
-  Wire.setSDA(sda_imu);//GPIO20
-  Wire.setSCL(scl_imu);//GPIO21
+  Wire.setSDA(sda_imu);
+  Wire.setSCL(scl_imu);
 
   Wire.begin();
   // Initialize MPU6050
