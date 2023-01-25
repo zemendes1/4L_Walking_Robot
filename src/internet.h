@@ -21,5 +21,8 @@ extern String picoLEDState;
 extern unsigned long currentTime;
 extern unsigned long previousTime;
 extern const long timeoutTime;
+extern bool move_forward_bool; 
+extern bool obstacle_bool;
+extern bool climb_bool;
 
 #endif

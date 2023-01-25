@@ -128,9 +128,9 @@ void setup()
   /*interval = 10;
   set_state(fsm1, 0);*/
 
-  //conecta_wifi();
+  conecta_wifi();
   sonar_setup();
-  imu_setup();
+  //imu_setup();
   stop_distance=15;
 }
 
@@ -145,14 +145,17 @@ void loop()
   //turn_left();
   //turn_right();
 
-  //conexao_html();
+  conexao_html();
   //sonar_loop();
-  imu_loop();
+  //imu_loop();
   
   //obstacle_turn_right();
 
   //turn_angulo_definido(-200);
   //delay(10000);
+  if (move_forward_bool) {move_forward();}
+  else if (obstacle_bool) {obstacle_turn_right();}
+  else if (obstacle_bool) {/*não implementado*/}
   
 
   

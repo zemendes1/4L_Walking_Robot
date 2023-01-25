@@ -6,8 +6,10 @@
 #include "internet.h"
 
 
-const char* ssid = "C:Virus.exe";
-const char* password = "Donald1Trump2";
+//const char* ssid = "C:Virus.exe";
+//const char* password = "Donald1Trump2";
+const char* ssid = "MEO-F44E90";
+const char* password = "de6ee7ea05";
 
 
 // Set web server port number to 80
@@ -15,10 +17,11 @@ WiFiServer server(80);
  
 // Variable to store the HTTP request
 String header;
- 
-// Variable to store onboard LED state
-String picoLEDState = "off";
- 
+
+String Name ="";
+String text ="";
+String submit ="";
+
 // Current time
 unsigned long currentTime = millis();
 // Previous time
@@ -26,6 +29,14 @@ unsigned long previousTime = 0;
 // Define timeout time in milliseconds (example: 2000ms = 2s)
 const long timeoutTime = 2000;
 
+bool move_forward_bool = false;
+String move_forward_state = "off";
+
+bool obstacle_bool = false;
+String obstacle_state = "off";
+
+bool climb_bool = false;
+String climb_state = "off";
 
 
 void conecta_wifi(){
@@ -84,13 +95,35 @@ void conexao_html (){
  
             // Switch the LED on and off
             if (header.indexOf("GET /led/on") >= 0) {
-              Serial.println("LED on");
-              picoLEDState = "on";
-              digitalWrite(6, HIGH);
+              Serial.println("Forward ON");
+              move_forward_state = "on";
+              move_forward_bool = true;
             } else if (header.indexOf("GET /led/off") >= 0) {
-              Serial.println("LED off");
-              picoLEDState = "off";
-              digitalWrite(6, LOW);
+              Serial.println("Forward OFF");
+              move_forward_state = "off";
+              move_forward_bool = false;
+            }
+
+            // Switch the LED on and off
+            if (header.indexOf("GET /teste/on") >= 0) {
+              Serial.println("OBSTACLE ON");
+              obstacle_state = "on";
+              obstacle_bool = true;
+            } else if (header.indexOf("GET /teste/off") >= 0) {
+              Serial.println("OBSTACLE OFF");
+              obstacle_state = "off";
+              obstacle_bool = false;
+            }
+
+            // Switch the LED on and off
+            if (header.indexOf("GET /climb/on") >= 0) {
+              Serial.println("CLIMB ON");
+              climb_state = "on";
+              climb_bool = true;
+            } else if (header.indexOf("GET /climb/off") >= 0) {
+              Serial.println("CLIMB OFF");
+              climb_state = "off";
+              climb_bool = false;
             }
  
             // Display the HTML web page
@@ -108,11 +141,10 @@ void conexao_html (){
             client.println("<body><h1>Pico W LED Control</h1>");
  
             // Display current state, and ON/OFF buttons for Onboard LED
-            client.println("<p>Onboard LED is " + picoLEDState + "</p>");
+            client.println("<p>Move Forward is " + move_forward_state + "</p>");
             
             // Set buttons
-            if (picoLEDState == "off") {
-              
+            if (move_forward_state == "off") {
               //picoLEDState is off, display the ON button
               client.println("<p><a href=\"/led/on\"><button class=\"button\">ON</button></a></p>");
             } else {
@@ -120,7 +152,34 @@ void conexao_html (){
               //picoLEDState is on, display the OFF button
               client.println("<p><a href=\"/led/off\"><button class=\"button button2\">OFF</button></a></p>");
             }
- 
+
+            // Display current state, and ON/OFF buttons for Onboard LED
+            client.println("<p>Obstacle Turn Right is " + obstacle_state + "</p>");
+
+            if (obstacle_state == "off") {
+              //picoLEDState is off, display the ON button
+              client.println("<p><a href=\"/teste/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              //picoLEDState is on, display the OFF button
+              client.println("<p><a href=\"/teste/off\"><button class=\"button button2\">OFF</button></a></p>");
+            }
+
+            // Display current state, and ON/OFF buttons for Onboard LED
+            client.println("<p>Climb is " + climb_state + "</p>");
+
+            if (climb_state == "off") {
+              //picoLEDState is off, display the ON button
+              client.println("<p><a href=\"/climb/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              //picoLEDState is on, display the OFF button
+              client.println("<p><a href=\"/climb/off\"><button class=\"button button2\">OFF</button></a></p>");
+            }
+            /*
+            client.println("<label for="+Name+">Ângulo Pretendido:</label>");
+            client.println("<input type="+text+" id="+Name+" name="+Name+" placeholder="+"Jane Doe"+">");
+            client.println("<button type="+submit+" value=Submit>");*/
+
+
             client.println("</body></html>");
  
             // The HTTP response ends with another blank line
