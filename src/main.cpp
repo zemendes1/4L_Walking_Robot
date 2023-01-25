@@ -137,6 +137,7 @@ void setup()
 void loop()
 {   
   sonar_loop();
+  conexao_html();
 
   //standup();
   //liedown();
@@ -144,22 +145,18 @@ void loop()
   //move_right();
   //turn_left();
   //turn_right();
-
-  conexao_html();
-  //sonar_loop();
-  //imu_loop();
-  
   //obstacle_turn_right();
-
-  //turn_angulo_definido(-200);
-  //delay(10000);
+  
+  //imu_loop();
+ 
   if (move_forward_bool) {move_forward();}
   else if (obstacle_bool) {obstacle_turn_right();}
-  else if (obstacle_bool) {/*não implementado*/}
-  
+  //else if (obstacle_bool) {não implementado}
+  else if(turn_bool){
+    turn_angulo_definido(AnguloDefinido);
+    turn_bool=false;
+  }
 
-  
-  
 
 }
 

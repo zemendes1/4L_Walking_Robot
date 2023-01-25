@@ -22,6 +22,12 @@ String Name ="";
 String text ="";
 String submit ="";
 
+// Decode HTTP GET value
+String valueString = String(5);
+int pos1 = 0;
+int pos2 = 0;
+int AnguloDefinido=0;
+
 // Current time
 unsigned long currentTime = millis();
 // Previous time
@@ -37,6 +43,11 @@ String obstacle_state = "off";
 
 bool climb_bool = false;
 String climb_state = "off";
+
+bool turn_bool = false;
+String turn_state = "off";
+
+
 
 
 void conecta_wifi(){
@@ -93,7 +104,7 @@ void conexao_html (){
             client.println("Connection: close");
             client.println();
  
-            // Switch the LED on and off
+            // Switch the FORWARD on and off
             if (header.indexOf("GET /led/on") >= 0) {
               Serial.println("Forward ON");
               move_forward_state = "on";
@@ -104,7 +115,7 @@ void conexao_html (){
               move_forward_bool = false;
             }
 
-            // Switch the LED on and off
+            // Switch the OBSTACLE on and off
             if (header.indexOf("GET /teste/on") >= 0) {
               Serial.println("OBSTACLE ON");
               obstacle_state = "on";
@@ -115,7 +126,7 @@ void conexao_html (){
               obstacle_bool = false;
             }
 
-            // Switch the LED on and off
+            // Switch the CLIMB on and off
             if (header.indexOf("GET /climb/on") >= 0) {
               Serial.println("CLIMB ON");
               climb_state = "on";
@@ -124,6 +135,17 @@ void conexao_html (){
               Serial.println("CLIMB OFF");
               climb_state = "off";
               climb_bool = false;
+            }
+
+             // Switch the CLIMB on and off
+            if (header.indexOf("GET /turn/on") >= 0) {
+              Serial.println("TURN ON");
+              turn_state = "on";
+              turn_bool = true;
+            } else if (header.indexOf("GET /turn/off") >= 0) {
+              Serial.println("TURN OFF");
+              turn_state = "off";
+              turn_bool = false;
             }
  
             // Display the HTML web page
@@ -136,9 +158,14 @@ void conexao_html (){
             client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
             client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
             client.println(".button2 {background-color: #F23A3A;}</style></head>");
+       
+            // CSS - Modify as desired
+            client.println("<style>body { text-align: center; font-family: \"Trebuchet MS\", Arial; margin-left:auto; margin-right:auto; }");
+            client.println(".slider { -webkit-appearance: none; width: 300px; height: 25px; border-radius: 10px; background: #ffffff; outline: none;  opacity: 0.7;-webkit-transition: .2s;  transition: opacity .2s;}");
+            client.println(".slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none; width: 35px; height: 35px; border-radius: 50%; background: #ff3410; cursor: pointer; }</style>");
  
             // Web Page Heading
-            client.println("<body><h1>Pico W LED Control</h1>");
+            client.println("<body><h1>Bem Vindo ao Controlador Via Internet.</h1>");
  
             // Display current state, and ON/OFF buttons for Onboard LED
             client.println("<p>Move Forward is " + move_forward_state + "</p>");
@@ -174,18 +201,53 @@ void conexao_html (){
               //picoLEDState is on, display the OFF button
               client.println("<p><a href=\"/climb/off\"><button class=\"button button2\">OFF</button></a></p>");
             }
-            
-            client.println("<label for=\"testname\">Ângulo Pretendido:</label><br>");
-            client.println("<input type=\"text\" id=\"fname\" name=\"fname\" value=\"\"><br>");
-            client.println("<input type=\"submit\" value=\"Submit\">");
 
-            if (true){
-              Serial.println( header.indexOf("GET /fname"));
+            // Get JQuery
+            client.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>");
+                     
+            // Page title
+            client.println("</head><body style=\"background-color:#3857f2;\"><h1 style=\"color:#f7e00a;\">Definir Angulo a Virar</h1>");
+            
+            // Position display
+            client.println("<h2 style=\"color:#ffffff;\">Position: <span id=\"servoPos\"></span>&#176;</h2>"); 
+
+            // Display current state, and ON/OFF buttons for Onboard LED
+            client.println("<p>Turn is " + turn_state + "</p>");
+
+            if (turn_state == "off") {
+              //picoLEDState is off, display the ON button
+              client.println("<p><a href=\"/turn/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              //picoLEDState is on, display the OFF button
+              client.println("<p><a href=\"/turn/off\"><button class=\"button button2\">OFF</button></a></p>");
             }
             
+                     
+            // Slider control
+            client.println("<input type=\"range\" min=\"-360\" max=\"360\" class=\"slider\" id=\"servoSlider\" onchange=\"servo(this.value)\" value=\""+valueString+"\"/>");
+            
+            // Javascript
+            client.println("<script>var slider = document.getElementById(\"servoSlider\");");
+            client.println("var servoP = document.getElementById(\"servoPos\"); servoP.innerHTML = slider.value;");
+            client.println("slider.oninput = function() { slider.value = this.value; servoP.innerHTML = this.value; }");
+            client.println("$.ajaxSetup({timeout:1000}); function servo(pos) { ");
+            client.println("$.get(\"/?value=\" + pos + \"&\"); {Connection: close};}</script>");
 
             client.println("</body></html>");
- 
+
+            // GET data
+            if(header.indexOf("GET /?value=")>=0) {
+              pos1 = header.indexOf('=');
+              pos2 = header.indexOf('&');
+              
+              // String with motor position
+              valueString = header.substring(pos1+1, pos2);
+              
+              // Move servo into position
+              AnguloDefinido=valueString.toInt();
+
+            }    
+
             // The HTTP response ends with another blank line
             client.println();
             // Break out of the while loop

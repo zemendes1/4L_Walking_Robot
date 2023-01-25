@@ -24,5 +24,7 @@ extern const long timeoutTime;
 extern bool move_forward_bool; 
 extern bool obstacle_bool;
 extern bool climb_bool;
+extern bool turn_bool;
+extern int AnguloDefinido;
 
 #endif
