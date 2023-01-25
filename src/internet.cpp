@@ -174,11 +174,15 @@ void conexao_html (){
               //picoLEDState is on, display the OFF button
               client.println("<p><a href=\"/climb/off\"><button class=\"button button2\">OFF</button></a></p>");
             }
-            /*
-            client.println("<label for="+Name+">Ângulo Pretendido:</label>");
-            client.println("<input type="+text+" id="+Name+" name="+Name+" placeholder="+"Jane Doe"+">");
-            client.println("<button type="+submit+" value=Submit>");*/
+            
+            client.println("<label for=\"testname\">Ângulo Pretendido:</label><br>");
+            client.println("<input type=\"text\" id=\"fname\" name=\"fname\" value=\"\"><br>");
+            client.println("<input type=\"submit\" value=\"Submit\">");
 
+            if (true){
+              Serial.println( header.indexOf("GET /fname"));
+            }
+            
 
             client.println("</body></html>");
  
