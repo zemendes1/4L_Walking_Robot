@@ -130,7 +130,7 @@ void setup()
 
   conecta_wifi();
   sonar_setup();
-  //imu_setup();
+  imu_setup();
   stop_distance=15;
 }
 
@@ -138,6 +138,7 @@ void loop()
 {   
   sonar_loop();
   conexao_html();
+  imu_loop();
 
   //standup();
   //liedown();
@@ -147,8 +148,7 @@ void loop()
   //turn_right();
   //obstacle_turn_right();
   
-  //imu_loop();
- 
+  /*
   if (move_forward_bool) {move_forward();}
   else if (obstacle_bool) {obstacle_turn_right();}
   //else if (obstacle_bool) {não implementado}
@@ -156,7 +156,7 @@ void loop()
     turn_angulo_definido(AnguloDefinido);
     turn_bool=false;
   }
-
+  */
 
 }
 

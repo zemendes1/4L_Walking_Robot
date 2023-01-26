@@ -3,9 +3,10 @@
 /****/
 #include <Arduino.h>
 #include <Wire.h>
-
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
 #include <HCSR04.h>
-#include <MPU6050.h>
+
 
 // Ultrasom
 #define triggerPin 27 
