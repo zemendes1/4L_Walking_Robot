@@ -128,7 +128,7 @@ void setup()
   /*interval = 10;
   set_state(fsm1, 0);*/
 
-  conecta_wifi();
+  //conecta_wifi();
   sonar_setup();
   imu_setup();
   stop_distance=15;
@@ -137,7 +137,7 @@ void setup()
 void loop()
 {   
   sonar_loop();
-  conexao_html();
+  //conexao_html();
   imu_loop();
 
   //standup();

@@ -12,9 +12,6 @@
 #define triggerPin 27 
 #define echoPin 28
 
-//MPU
-#define sda_imu 4
-#define scl_imu 5
 
 extern float distance_sonar;
 extern float distance_tof, prev_distance_tof;

@@ -28,6 +28,9 @@ void imu_setup(void) {
 
   Serial.println("Adafruit MPU6050 test!");
 
+  Wire.setSDA(8);
+  Wire.setSCL(9);
+
   // Try to initialize!
   if (!mpu.begin()) {
     Serial.println("Failed to find MPU6050 chip");
