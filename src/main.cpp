@@ -39,11 +39,11 @@
 #define _0graus_Motor6 37
 #define _90graus_Motor6 21.7
 
-#define _0graus_Motor7 22.5
-#define _90graus_Motor7 7.5
+#define _0graus_Motor7 39
+#define _90graus_Motor7 24.7
 
-#define _90graus_Motor8 25.3
-#define _180graus_Motor8 10
+#define _90graus_Motor8 21.8
+#define _180graus_Motor8 7.7
 
 RP2040_PWM *PWM_Instance_1A;
 RP2040_PWM *PWM_Instance_1B;
@@ -129,21 +129,21 @@ void setup()
   set_state(fsm1, 0);*/
 
   //conecta_wifi();
-  sonar_setup();
-  imu_setup();
-  stop_distance=15;
+  //sonar_setup();
+  //imu_setup();
+  //stop_distance=15;
 }
 
 void loop()
 {   
-  sonar_loop();
+  //sonar_loop();
   //conexao_html();
-  imu_loop();
+  //imu_loop();
 
   //standup();
   //liedown();
   //move_forward();
-  //move_right();
+  move_right();
   //turn_left();
   //turn_right();
   //obstacle_turn_right();
@@ -157,6 +157,9 @@ void loop()
     turn_bool=false;
   }
   */
+
+ 
+ 
 
 }
 
