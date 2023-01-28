@@ -69,6 +69,8 @@ RP2040_PWM *PWM_Instance_0A;
 RP2040_PWM *PWM_Instance_0B;
 
 sensors_event_t aceleracao_previa;
+float pitchangle_previo=0.00000f;
+
 
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
@@ -359,51 +361,62 @@ void climbing()
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   delay(100);
   imu_loop();
-  delay(4000);
+  delay(500);
   recebe_angulos(191,45,-11,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(4000);
+  delay(500);
   recebe_angulos(191,45,66,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(4000);
+  delay(500);
   while(1){
     boda=boda-3;
     recebe_angulos(191,45,66,135,173,28,boda,152,100);
     delay(100);
-    aceleracao_previa.acceleration.x=a.acceleration.x;
+    pitchangle_previo=pitchangle;
     imu_loop();
     if(boda<=0){
       boda=28;
       break;
     }
-    else if(aceleracao_previa.acceleration.x+0.0005>=a.acceleration.x && aceleracao_previa.acceleration.x-0.0005<=a.acceleration.x){
+    else if(pitchangle_previo+0.0005>=pitchangle && pitchangle_previo-0.0005<=pitchangle){
       break;
     }
+
+    Serial.println();
+    Serial.println(pitchangle);
+    Serial.println(pitchangle_previo);
+    Serial.println("boda");
+    Serial.println();
 
 
   }
   
-  delay(4000);
+  delay(500);
   recebe_angulos(135,66,45,191,152,63,boda,174,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,66,45,191,152,90,boda,174,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,-11,45,191,152,90,boda,174,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,-11,45,191,152,6,boda,174,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,-11,45,191,152,6,boda,90,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,-11,45,114,152,6,boda,90,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(135,-11,45,114,152,6,6,180-boda,100);
-  delay(4000);
+  delay(500);
   recebe_angulos(114,45,40,135,116,28,6,180-boda,100);
+  delay(500);
+  recebe_angulos(114,45,40,135,90,28,6,180-boda,100);
+  delay(500);
+  recebe_angulos(191,45,40,135,90,28,6,180-boda,100);
+  delay(500);
+  recebe_angulos(191,45,40,135,173,28,6,180-boda,100);
   delay(10000);
-  //recebe_angulos(191,45,-11,135,173,28,6,152,100);
-
+  
  
 }
 

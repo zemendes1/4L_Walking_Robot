@@ -14,6 +14,7 @@
 
 extern float distance_sonar;
 extern sensors_event_t a, g, temp;
+extern float rollangle, pitchangle;
 
 void sonar_setup();
 void sonar_loop();
