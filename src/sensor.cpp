@@ -22,9 +22,7 @@ void sonar_loop () {
 
 
 void imu_setup(void) {
-  Serial.begin(115200);
-  while (!Serial)
-    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+
 
   Serial.println("Adafruit MPU6050 test!");
 
@@ -57,6 +55,7 @@ void imu_setup(void) {
     break;
   }
   mpu.setGyroRange(MPU6050_RANGE_500_DEG);
+
   Serial.print("Gyro range set to: ");
   switch (mpu.getGyroRange()) {
   case MPU6050_RANGE_250_DEG:
@@ -100,7 +99,7 @@ void imu_setup(void) {
   }
 
   Serial.println("");
-  delay(100);
+
 }
 
 void imu_loop() {
@@ -109,7 +108,9 @@ void imu_loop() {
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
 
-  /* Print out the values */
+  //Print out the values 
+
+  if(Serial){
   Serial.print("Acceleration X: ");
   Serial.print(a.acceleration.x);
   Serial.print(", Y: ");
@@ -131,5 +132,6 @@ void imu_loop() {
   Serial.println(" degC");
 
   Serial.println("");
-  delay(500);
+  }
+
 }

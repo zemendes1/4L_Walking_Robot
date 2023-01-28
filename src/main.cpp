@@ -144,7 +144,7 @@ void setup()
 
   //conecta_wifi();
   //sonar_setup();
-  //imu_setup();
+  imu_setup();
   //stop_distance=15;
 }
 
@@ -152,12 +152,12 @@ void loop()
 {   
   //sonar_loop();
   //conexao_html();
-  //imu_loop();
+  imu_loop();
 
   //standup();
   //liedown();
-  //move_forward();
-  move_right();
+  move_forward_no_sensor();
+  //move_right();
   //turn_left();
   //turn_right();
   //obstacle_turn_right();
@@ -424,11 +424,11 @@ void turn_angulo_definido(int angulo_requerido){
 
 
 void liedown(){
-  recebe_angulos(180,90,90,180,160,20,20,160,100);
+  recebe_angulos(180,0,0,180,90,90,90,90,100);
 }
 
 void standup(){
-  recebe_angulos(180,90,90,180,160,20,20,160,100);
+  recebe_angulos(90,90,90,90,180,0,0,180,100);
 }
 
 
