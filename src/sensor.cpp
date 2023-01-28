@@ -17,6 +17,8 @@ UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
 float distance_sonar=0.000f;
 float rollangle=0.00000f, pitchangle=0.00000f;
 
+sensors_event_t a, g, temp;
+
 void sonar_setup () {
   
 }
@@ -110,7 +112,7 @@ void imu_setup(void) {
 void imu_loop() {
 
   /* Get new sensor events with the readings */
-  sensors_event_t a, g, temp;
+  
   mpu.getEvent(&a, &g, &temp);
 
   //Print out the values 
