@@ -6,6 +6,20 @@
 #include "internet.h"
 #include "sensor.h"
 
+//  -----               -----
+// |  8  |   -------   |  7  |
+// |     |  |HC_SR04|  |     |
+//  ----- -----   ----- -----
+//       |  4  | |  3  |
+//       |     | |     |
+//        -----   -----
+//       |  2  | |  1  |
+//       |     | |     |
+//  ----- -----   ----- -----
+// |  6  |             |  5  |
+// |     |             |     |
+//  -----               -----  (Top View)
+
 #define MOTOR_1 2
 #define MOTOR_2 3
 #define MOTOR_3 12
@@ -56,7 +70,7 @@ RP2040_PWM *PWM_Instance_0B;
 
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
-void calibra();void obstacle_turn_right();
+void calibra();void obstacle_turn_right();void move_forward_no_sensor();
 
 
 void move_forward();
@@ -149,7 +163,7 @@ void loop()
   //obstacle_turn_right();
   
   /*
-  if (move_forward_bool) {move_forward();}
+  if (move_forward_bool) {move_forward_no_sensor();}
   else if (obstacle_bool) {obstacle_turn_right();}
   //else if (obstacle_bool) {não implementado}
   else if(turn_bool){
@@ -253,6 +267,17 @@ void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angu
   servo_angle(angulo8, 8);
 
   delay(delayms);
+}
+
+void move_forward_no_sensor()
+{
+  recebe_angulos(191,45,-11,135,173,28,6,152,100);
+  recebe_angulos(191,45,66,135,173,28,63,152,100);
+  recebe_angulos(135,66,45,191,152,63,28,174,100);
+  recebe_angulos(135,-11,45,191,152,6,28,174,100);
+  recebe_angulos(135,-11,45,114,152,6,28,116,100);
+  recebe_angulos(114,45,-11,135,116,28,6,152,100);
+  recebe_angulos(191,45,-11,135,173,28,6,152,100);
 }
 
 void move_forward()
