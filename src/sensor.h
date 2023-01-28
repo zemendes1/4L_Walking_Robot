@@ -12,15 +12,16 @@
 #define triggerPin 27 
 #define echoPin 28
 
-
 extern float distance_sonar;
-extern float distance_tof, prev_distance_tof;
 
 void sonar_setup();
 void sonar_loop();
 
 void imu_setup();
 void imu_loop();
-void imu_checkSettings();
+
+void filter_setup();
+void filter_loop();
+
 
 #endif

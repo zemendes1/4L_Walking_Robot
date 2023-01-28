@@ -3,14 +3,19 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <HCSR04.h>
+#include <kalman.h>
 
 #include "sensor.h"
+
+KalmanFilter kf;KalmanFilter kf1;
+unsigned long timer = 0;
 
 Adafruit_MPU6050 mpu;
 
 //Ultrasom
 UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
 float distance_sonar=0.000f;
+float rollangle=0.00000f, pitchangle=0.00000f;
 
 void sonar_setup () {
   
@@ -110,7 +115,7 @@ void imu_loop() {
 
   //Print out the values 
 
-  if(Serial){
+  if(0){
   Serial.print("Acceleration X: ");
   Serial.print(a.acceleration.x);
   Serial.print(", Y: ");
@@ -133,5 +138,48 @@ void imu_loop() {
 
   Serial.println("");
   }
+  float accelX=a.acceleration.x;
+  float accelY=a.acceleration.y;
+  float accelZ=a.acceleration.z;
+  rollangle=atan2(accelY,accelZ)*180/PI; // FORMULA FOUND ON INTERNET
+  pitchangle=atan2(accelX,sqrt(accelY*accelY+accelZ*accelZ))*180/PI; //FORMULA FOUND ON INTERNET
+  
+  if(Serial){
+  Serial.print("Roll angle: ");Serial.println(rollangle);
+  Serial.print("Pitch angle: ");Serial.println(pitchangle);
+  Serial.println("");
+  }
 
+}
+
+
+
+void filter_setup() {
+  // Set initial state
+  kf.set(pitchangle);
+  kf.setProcessNoise(0.1, 0.01); // Position, velocity
+  kf.setMeasurementNoise(1);
+}
+
+void filter_loop() {
+
+  // Delta time : time since last prediction
+  float dt = (millis()-timer)/1000.f;
+  timer = millis();
+
+  // Kalman filter steps
+  kf.predict(dt);
+  int x = kf.get();
+  kf.correct(rollangle);
+
+  // Kalman filter steps
+  kf1.predict(dt);
+  int x1 = kf1.get();
+  kf1.correct(pitchangle);
+
+  if(Serial){
+  Serial.print("Roll angle Corrected: ");Serial.println(rollangle);
+  Serial.print("Pitch angle Corrected: ");Serial.println(pitchangle);
+  Serial.println("");
+  }
 }

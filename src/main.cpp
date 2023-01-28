@@ -145,6 +145,9 @@ void setup()
   //conecta_wifi();
   //sonar_setup();
   imu_setup();
+  imu_loop();
+  filter_setup();
+
   //stop_distance=15;
 }
 
@@ -153,10 +156,11 @@ void loop()
   //sonar_loop();
   //conexao_html();
   imu_loop();
-
+  filter_loop();
+  delay(500);
   //standup();
   //liedown();
-  move_forward_no_sensor();
+  //move_forward_no_sensor();
   //move_right();
   //turn_left();
   //turn_right();
