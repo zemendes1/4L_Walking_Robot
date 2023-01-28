@@ -148,9 +148,6 @@ void setup()
   //conecta_wifi();
   //sonar_setup();
   imu_setup();
-  imu_loop();
-  filter_setup();
-
   //stop_distance=15;
 }
 
@@ -158,9 +155,8 @@ void loop()
 {   
   //sonar_loop();
   //conexao_html();
-  imu_loop();
-  filter_loop();
-  delay(500);
+  //imu_loop();
+
   //standup();
   //liedown();
   //move_forward_no_sensor();
@@ -382,7 +378,7 @@ void climbing()
       boda=28;
       break;
     }
-    else if(aceleracao_previa.acceleration.x+0.0001>=a.acceleration.x && aceleracao_previa.acceleration.x-0.0001<=a.acceleration.x){
+    else if(aceleracao_previa.acceleration.x+0.0005>=a.acceleration.x && aceleracao_previa.acceleration.x-0.0005<=a.acceleration.x){
       break;
     }
 

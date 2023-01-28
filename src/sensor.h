@@ -13,7 +13,6 @@
 #define echoPin 28
 
 extern float distance_sonar;
-extern float distance_tof, prev_distance_tof;
 extern sensors_event_t a, g, temp;
 
 void sonar_setup();
