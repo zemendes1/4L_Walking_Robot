@@ -358,18 +358,36 @@ void turn_right(){
 void climbing()
 {
   int boda=90;
-  recebe_angulos(191,45,-11,135,173,28,6,152,100);
-  delay(100);
-  imu_loop();
-  delay(500);
-  recebe_angulos(191,45,-11,135,173,28,90,152,100);
-  delay(100);
-  imu_loop();
-  delay(500);
-  recebe_angulos(191,45,66,135,173,28,90,152,100);
-  delay(100);
-  imu_loop();
-  delay(500);
+  if(iteracao==0){
+    recebe_angulos(191,45,-11,135,173,28,6,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+    recebe_angulos(191,45,-11,135,173,28,90,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+    recebe_angulos(191,45,66,135,173,28,90,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+  }
+
+  else{
+    recebe_angulos(191,90,-11,135,173,28,6,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+    recebe_angulos(191,90,-11,135,173,28,90,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+    recebe_angulos(191,90,66,135,173,28,90,152,100);
+    delay(100);
+    imu_loop();
+    delay(500);
+
+  }
   if(iteracao==0){
     while(1){
       boda=boda-3;
@@ -431,15 +449,15 @@ void climbing()
     delay(500);
     recebe_angulos(135,66,45,191,152,90,boda,174,100);
     delay(500);
-    recebe_angulos(135,15,45,191,152,90,boda,174,100);
+    recebe_angulos(135,45,45,191,152,90,boda,174,100);
     delay(500);
-    recebe_angulos(135,15,45,191,152,6,boda,174,100);
+    recebe_angulos(135,45,45,191,152,6,boda,174,100);
     delay(500);
-    recebe_angulos(135,15,45,191,152,6,boda,90,100);
+    recebe_angulos(135,45,45,191,152,6,boda,90,100);
     delay(500);
-    recebe_angulos(135,15,45,114,152,6,boda,90,100);
+    recebe_angulos(135,45,45,114,152,6,boda,90,100);
     delay(500);
-    recebe_angulos(135,15,45,114,152,6,6,180,100);
+    recebe_angulos(135,45,45,114,152,6,6,180,100);
     delay(500);
     recebe_angulos(114,66,40,135,116,28,6,180,100);
     delay(500);
@@ -447,6 +465,33 @@ void climbing()
     delay(500);
     recebe_angulos(191,66,40,135,90,28,6,180,100);
     delay(500);
+    iteracao++;
+    
+    
+  }
+  else if (iteracao ==2){
+    delay(500);
+    recebe_angulos(135,66,45,191,152,63,boda,174,100);
+    delay(500);
+    recebe_angulos(135,66,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,6,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,-11,45,114,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,-11,45,114,152,6,6,180,100);
+    delay(500);
+    recebe_angulos(114,66,-11,135,116,28,6,180,100);
+    delay(500);
+    recebe_angulos(114,66,-11,135,90,28,6,180,100);
+    delay(500);
+    recebe_angulos(191,66,-11,135,90,28,6,180,100);
+    delay(500);
+    iteracao++;
     
     
   }
