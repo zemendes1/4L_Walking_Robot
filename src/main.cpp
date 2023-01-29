@@ -361,73 +361,97 @@ void climbing()
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   delay(100);
   imu_loop();
-  delay(1000);
+  delay(500);
   recebe_angulos(191,45,-11,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(1000);
+  delay(500);
   recebe_angulos(191,45,66,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(1000);
-  while(1){
-    boda=boda-3;
-    recebe_angulos(191,45,66,135,173,28,boda,152,100);
-    delay(100);
-    pitchangle_previo=pitchangle;
-    imu_loop();
-    if(boda<=0){
-      boda=28;
-      break;
-    }
-    else if(pitchangle_previo+0.0005>=pitchangle && pitchangle_previo-0.0005<=pitchangle){
-      break;
-    }
-
-    Serial.println();
-    Serial.println(pitchangle);
-    Serial.println(pitchangle_previo);
-    Serial.println("boda");
-    Serial.println();
-
-
-  }
-  
-  delay(1000);
-  recebe_angulos(135,66,45,191,152,63,boda,174,100);
-  delay(1000);
-  recebe_angulos(135,66,45,191,152,90,boda,174,100);
-  delay(1000);
-  recebe_angulos(135,-11,45,191,152,90,boda,174,100);
-  delay(1000);
-  recebe_angulos(135,-11,45,191,152,6,boda,174,100);
-  delay(1000);
-  recebe_angulos(135,-11,45,191,152,6,boda,90,100);
-  delay(1000);
-  recebe_angulos(135,-11,45,114,152,6,boda,90,100);
-  delay(1000);
-  recebe_angulos(135,-11,45,114,152,6,6,180,100);
-  delay(1000);
+  delay(500);
   if(iteracao==0){
-    recebe_angulos(114,66,40,135,116,28,6,180,100);
-    delay(1000);
-    recebe_angulos(114,66,40,135,90,28,6,180,100);
-    delay(1000);
-    recebe_angulos(191,66,40,135,90,28,6,180,100);
-    delay(1000);
-    iteracao++;
+    while(1){
+      boda=boda-3;
+      recebe_angulos(191,45,66,135,173,28,boda,152,100);
+      delay(100);
+      pitchangle_previo=pitchangle;
+      imu_loop();
+      if(boda<=0){
+        boda=28;
+        break;
+      }
+      else if(pitchangle_previo+0.0005>=pitchangle && pitchangle_previo-0.0005<=pitchangle){
+        break;
+      }
+
+      Serial.println();
+      Serial.println(pitchangle);
+      Serial.println(pitchangle_previo);
+      Serial.println("boda");
+      Serial.println();
+
+
+    }
   }
   else{
-    recebe_angulos(114,-11,40,135,116,28,6,180,100);
-    delay(1000);
-    recebe_angulos(114,-11,40,135,90,28,6,180,100);
-    delay(1000);
-    recebe_angulos(191,-11,40,135,90,28,6,180,100);
-    delay(1000);
-    iteracao=0;
+    boda=0;
+  }
+
+  if(iteracao==0){
+
+    delay(500);
+    recebe_angulos(135,66,45,191,152,63,boda,174,100);
+    delay(500);
+    recebe_angulos(135,66,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,6,boda,174,100);
+    delay(500);
+    recebe_angulos(135,-11,45,191,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,-11,45,114,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,-11,45,114,152,6,6,180,100);
+    delay(500);
+
+    
+    recebe_angulos(114,90,40,135,116,28,6,180,100);
+    delay(500);
+    recebe_angulos(114,90,40,135,90,28,6,180,100);
+    delay(500);
+    recebe_angulos(191,90,40,135,90,28,6,180,100);
+    delay(500);
+    iteracao++;
+  }
+  else if (iteracao ==1){
+    delay(500);
+    recebe_angulos(135,66,45,191,152,63,boda,174,100);
+    delay(500);
+    recebe_angulos(135,66,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,15,45,191,152,90,boda,174,100);
+    delay(500);
+    recebe_angulos(135,15,45,191,152,6,boda,174,100);
+    delay(500);
+    recebe_angulos(135,15,45,191,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,15,45,114,152,6,boda,90,100);
+    delay(500);
+    recebe_angulos(135,15,45,114,152,6,6,180,100);
+    delay(500);
+    recebe_angulos(114,66,40,135,116,28,6,180,100);
+    delay(500);
+    recebe_angulos(114,66,40,135,90,28,6,180,100);
+    delay(500);
+    recebe_angulos(191,66,40,135,90,28,6,180,100);
+    delay(500);
+    
+    
   }
   recebe_angulos(191,45,40,135,173,28,6,180,100);
-  delay(10000);
+  delay(500);
   
  
 }
