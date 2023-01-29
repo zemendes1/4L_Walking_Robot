@@ -123,7 +123,7 @@ void set_state(fsm_t& fsm, int new_state)
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
-int stop_distance=0, move_forward_is_on=0;
+int stop_distance=0, move_forward_is_on=0, iteracao =0;
 
 void setup()
 {
@@ -361,15 +361,15 @@ void climbing()
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   delay(100);
   imu_loop();
-  delay(500);
+  delay(1000);
   recebe_angulos(191,45,-11,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(500);
+  delay(1000);
   recebe_angulos(191,45,66,135,173,28,90,152,100);
   delay(100);
   imu_loop();
-  delay(500);
+  delay(1000);
   while(1){
     boda=boda-3;
     recebe_angulos(191,45,66,135,173,28,boda,152,100);
@@ -393,28 +393,40 @@ void climbing()
 
   }
   
-  delay(500);
+  delay(1000);
   recebe_angulos(135,66,45,191,152,63,boda,174,100);
-  delay(500);
+  delay(1000);
   recebe_angulos(135,66,45,191,152,90,boda,174,100);
-  delay(500);
+  delay(1000);
   recebe_angulos(135,-11,45,191,152,90,boda,174,100);
-  delay(500);
+  delay(1000);
   recebe_angulos(135,-11,45,191,152,6,boda,174,100);
-  delay(500);
+  delay(1000);
   recebe_angulos(135,-11,45,191,152,6,boda,90,100);
-  delay(500);
+  delay(1000);
   recebe_angulos(135,-11,45,114,152,6,boda,90,100);
-  delay(500);
-  recebe_angulos(135,-11,45,114,152,6,6,180-boda,100);
-  delay(500);
-  recebe_angulos(114,45,40,135,116,28,6,180-boda,100);
-  delay(500);
-  recebe_angulos(114,45,40,135,90,28,6,180-boda,100);
-  delay(500);
-  recebe_angulos(191,45,40,135,90,28,6,180-boda,100);
-  delay(500);
-  recebe_angulos(191,45,40,135,173,28,6,180-boda,100);
+  delay(1000);
+  recebe_angulos(135,-11,45,114,152,6,6,180,100);
+  delay(1000);
+  if(iteracao==0){
+    recebe_angulos(114,66,40,135,116,28,6,180,100);
+    delay(1000);
+    recebe_angulos(114,66,40,135,90,28,6,180,100);
+    delay(1000);
+    recebe_angulos(191,66,40,135,90,28,6,180,100);
+    delay(1000);
+    iteracao++;
+  }
+  else{
+    recebe_angulos(114,-11,40,135,116,28,6,180,100);
+    delay(1000);
+    recebe_angulos(114,-11,40,135,90,28,6,180,100);
+    delay(1000);
+    recebe_angulos(191,-11,40,135,90,28,6,180,100);
+    delay(1000);
+    iteracao=0;
+  }
+  recebe_angulos(191,45,40,135,173,28,6,180,100);
   delay(10000);
   
  
