@@ -357,29 +357,23 @@ void turn_right(){
 
 
 void climbing()
-{
+{ 
+  uint delay_time=500;
+  uint delay_imu=100;
   int angulo_climbing=90;
 
 
   if(iteracao==0){
 
-    recebe_angulos(191,45,-11,135,173,28,6,152,100);
-    delay(100);
+    recebe_angulos(191,45,-11,135,173,28,6,152,100);delay(delay_time);
+    recebe_angulos(191,45,-11,135,173,28,90,152,100);delay(delay_time);
+    recebe_angulos(191,45,66,135,173,28,90,152,100);delay(delay_time);
     imu_loop();
-    delay(500);
-    recebe_angulos(191,45,-11,135,173,28,90,152,100);
-    delay(100);
-    imu_loop();
-    delay(500);
-    recebe_angulos(191,45,66,135,173,28,90,152,100);
-    delay(100);
-    imu_loop();
-    delay(500);
 
     while(1){
       angulo_climbing=angulo_climbing-3;
       recebe_angulos(191,45,66,135,173,28,angulo_climbing,152,100);
-      delay(100);
+      delay(delay_imu);
       pitchangle_previo=pitchangle;
       imu_loop();
       if(angulo_climbing<=0){
@@ -390,112 +384,90 @@ void climbing()
         break;
       }
 
-      Serial.println();
-      Serial.println(pitchangle);
-      Serial.println(pitchangle_previo);
-      Serial.println("angulo_climbing");
-      Serial.println();
-
-
+      if (Serial){
+        Serial.println();
+        Serial.println(pitchangle);
+        Serial.println(pitchangle_previo);
+        Serial.println("angulo_climbing");
+        Serial.println();
+      }
+      
     }
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,66,45,191,152,63,angulo_climbing,174,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,66,45,191,152,90,angulo_climbing,174,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,-11,45,191,152,90,angulo_climbing,174,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,-11,45,191,152,6,angulo_climbing,174,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,-11,45,191,152,6,angulo_climbing,90,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,-11,45,114,152,6,angulo_climbing,90,100);
-    delay(500);
+    delay(delay_time);
     recebe_angulos(135,-11,45,114,152,6,6,180,100);
-    delay(500);
+    delay(delay_time);
 
     
-    recebe_angulos(114,90,40,135,116,28,6,180,100);
-    delay(500);
-    recebe_angulos(114,90,40,135,90,28,6,180,100);
-    delay(500);
-    recebe_angulos(191,90,40,135,90,28,6,180,100);
-    delay(500);
+    recebe_angulos(114,90,40,135,116,28,6,180,100);delay(delay_time);
+    recebe_angulos(114,90,40,135,90,28,6,180,100);delay(delay_time);
+    recebe_angulos(191,90,40,135,90,28,6,180,100);delay(delay_time);
+
     iteracao++;
   }
   else{
-    recebe_angulos(191,90,-11,135,173,28,6,152,100);
-    delay(100);
-    imu_loop();
-    delay(500);
-    recebe_angulos(191,90,-11,135,173,28,90,152,100);
-    delay(100);
-    imu_loop();
-    delay(500);
-    recebe_angulos(191,90,66,135,173,28,90,152,100);
-    delay(100);
-    imu_loop();
-    delay(500);
+    recebe_angulos(191,90,-11,135,173,28,6,152,100);delay(delay_time);
+    recebe_angulos(191,90,-11,135,173,28,90,152,100);delay(delay_time);
+    recebe_angulos(191,90,66,135,173,28,90,152,100);delay(delay_time);
+    
     angulo_climbing=0;
 
     if(iteracao == 1){
 
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,66,45,191,152,63,angulo_climbing,174,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,66,45,191,152,90,angulo_climbing,174,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,45,45,191,152,90,angulo_climbing,174,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,45,45,191,152,6,angulo_climbing,174,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,45,45,191,152,6,angulo_climbing,90,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,45,45,114,152,6,angulo_climbing,90,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(135,45,45,114,152,6,6,180,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(114,66,40,135,116,28,6,180,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(114,66,40,135,90,28,6,180,100);
-      delay(500);
+      delay(delay_time);
       recebe_angulos(191,66,40,135,90,28,6,180,100);
-      delay(500);
+      delay(delay_time);
       iteracao++;
 
     }
 
     else if(iteracao==2){
 
-      delay(500);
-      recebe_angulos(135,66,45,191,152,63,angulo_climbing,174,100);
-      delay(500);
-      recebe_angulos(135,66,45,191,152,90,angulo_climbing,174,100);
-      delay(500);
-      recebe_angulos(135,-11,45,191,152,90,angulo_climbing,174,100);
-      delay(500);
-      recebe_angulos(135,-11,45,191,152,6,angulo_climbing,174,100);
-      delay(500);
-      recebe_angulos(135,-11,45,191,152,6,angulo_climbing,90,100);
-      delay(500);
-      recebe_angulos(135,-11,45,114,152,6,angulo_climbing,90,100);
-      delay(500);
-      recebe_angulos(135,-11,45,114,152,6,6,180,100);
-      delay(500);
-      recebe_angulos(114,66,-11,135,116,28,6,180,100);
-      delay(500);
-      recebe_angulos(114,66,-11,135,90,28,6,180,100);
-      delay(500);
-      recebe_angulos(191,66,-11,135,90,28,6,180,100);
-      delay(500);
-      
+      delay(delay_time);
+      recebe_angulos(135,66,45,191,152,63,angulo_climbing,174,100);delay(delay_time);
+      recebe_angulos(135,66,45,191,152,90,angulo_climbing,174,100);delay(delay_time);
+      recebe_angulos(135,-11,45,191,152,90,angulo_climbing,174,100);delay(delay_time);
+      recebe_angulos(135,-11,45,191,152,6,angulo_climbing,174,100);delay(delay_time);
+      recebe_angulos(135,-11,45,191,152,6,angulo_climbing,90,100);delay(delay_time);
+      recebe_angulos(135,-11,45,114,152,6,angulo_climbing,90,100);delay(delay_time);
+      recebe_angulos(135,-11,45,114,152,6,6,180,100);delay(delay_time);
+      recebe_angulos(114,66,-11,135,116,28,6,180,100);delay(delay_time);
+      recebe_angulos(114,66,-11,135,90,28,6,180,100);delay(delay_time);
+      recebe_angulos(191,66,-11,135,90,28,6,180,100);delay(delay_time);
 
     }
   }
 
-  recebe_angulos(191,45,40,135,173,28,6,180,100);
-  delay(500);
-  
+  recebe_angulos(191,45,40,135,173,28,6,180,100);delay(delay_time);
  
 }
 
