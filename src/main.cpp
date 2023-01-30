@@ -399,7 +399,7 @@ void climbing()
         angulo_climbing=28;
         break;
       }
-      else if(pitchangle_previo+0.0005>=pitchangle && pitchangle_previo-0.0005<=pitchangle){
+      else if(pitchangle_previo+0.005>=pitchangle && pitchangle_previo-0.005<=pitchangle){
         break;
       }
 
