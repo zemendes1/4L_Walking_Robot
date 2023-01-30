@@ -157,7 +157,8 @@ void loop()
 {   
   //sonar_loop();
   //conexao_html();
-  //imu_loop();
+  imu_loop();
+  delay(1000);
 
   //standup();
   //liedown();
@@ -166,7 +167,7 @@ void loop()
   //turn_left();
   //turn_right();
   //obstacle_turn_right();
-  climbing();
+  //climbing();
   
   
   /*

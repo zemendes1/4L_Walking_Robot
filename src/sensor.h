@@ -13,7 +13,6 @@
 #define echoPin 28
 
 extern float distance_sonar;
-extern sensors_event_t a, g, temp;
 extern float rollangle, pitchangle;
 
 void sonar_setup();
@@ -22,8 +21,7 @@ void sonar_loop();
 void imu_setup();
 void imu_loop();
 
-void filter_setup();
-void filter_loop();
+float filter(float newAngle, float newRate,int looptime);
 
 
 #endif

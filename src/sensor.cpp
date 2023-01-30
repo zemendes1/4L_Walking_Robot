@@ -3,11 +3,9 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <HCSR04.h>
-#include <kalman.h>
 
 #include "sensor.h"
 
-KalmanFilter kf;KalmanFilter kf1;
 unsigned long timer = 0;
 
 Adafruit_MPU6050 mpu;
@@ -16,6 +14,10 @@ Adafruit_MPU6050 mpu;
 UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
 float distance_sonar=0.000f;
 float rollangle=0.00000f, pitchangle=0.00000f;
+float tau=0.075;
+float b=0.000;
+int timer_filter=0;
+
 
 sensors_event_t a, g, temp;
 
@@ -143,45 +145,33 @@ void imu_loop() {
   float accelX=a.acceleration.x;
   float accelY=a.acceleration.y;
   float accelZ=a.acceleration.z;
-  rollangle=atan2(accelY,accelZ)*180/PI; // FORMULA FOUND ON INTERNET
+  //rollangle=atan2(accelY,accelZ)*180/PI; // FORMULA FOUND ON INTERNET
   pitchangle=atan2(accelX,sqrt(accelY*accelY+accelZ*accelZ))*180/PI; //FORMULA FOUND ON INTERNET
   
   if(Serial){
-  Serial.print("Roll angle: ");Serial.println(rollangle);
+  //Serial.print("Roll angle: ");Serial.println(rollangle);
   Serial.print("Pitch angle: ");Serial.println(pitchangle);
   Serial.println("");
-  }
 
-}
+  pitchangle=filter(pitchangle,g.gyro.x,millis()-timer_filter);
 
-
-
-void filter_setup() {
-  // Set initial state
-  kf.set(pitchangle);
-  kf.setProcessNoise(0.1, 0.01); // Position, velocity
-  kf.setMeasurementNoise(1);
-}
-
-void filter_loop() {
-
-  // Delta time : time since last prediction
-  float dt = (millis()-timer)/1000.f;
-  timer = millis();
-
-  // Kalman filter steps
-  kf.predict(dt);
-  int x = kf.get();
-  kf.correct(rollangle);
-
-  // Kalman filter steps
-  kf1.predict(dt);
-  int x1 = kf1.get();
-  kf1.correct(pitchangle);
-
-  if(Serial){
-  Serial.print("Roll angle Corrected: ");Serial.println(rollangle);
-  Serial.print("Pitch angle Corrected: ");Serial.println(pitchangle);
+  Serial.print("Pitch angle Filtered: ");Serial.println(pitchangle);
   Serial.println("");
   }
+
 }
+
+
+float filter(float newAngle, float newRate,int looptime) {
+  // a=tau / (tau + loop time)
+  // newAngle = angle measured with atan2 using the accelerometer
+  // newRate = angle measured using the gyro
+  // looptime = loop time in millis()
+  timer_filter=millis();
+  float dtC = float(looptime)/1000.0;
+  b=tau/(tau+dtC);
+  float x_angleC= b* (x_angleC + newRate * dtC) + (1-b) * (newAngle);
+  return x_angleC;
+
+}
+
