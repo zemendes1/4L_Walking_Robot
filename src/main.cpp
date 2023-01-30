@@ -18,7 +18,7 @@
 //  ----- -----   ----- -----
 // |  6  |             |  5  |
 // |     |             |     |
-//  -----               -----  (Top View)
+//  -----               -----  
 
 #define MOTOR_1 2
 #define MOTOR_2 3
@@ -68,15 +68,11 @@ RP2040_PWM *PWM_Instance_7B;
 RP2040_PWM *PWM_Instance_0A;
 RP2040_PWM *PWM_Instance_0B;
 
-sensors_event_t aceleracao_previa;
-float pitchangle_previo=0.00000f;
-
-
 void servo_angle(int angle, int motor);
 void recebe_angulos(int angulo1, int angulo2, int angulo3, int angulo4, int angulo5, int angulo6, int angulo7, int angulo8, int delayms);
-void calibra();void obstacle_turn_right();void move_forward_no_sensor();
-
-
+void calibra();
+void obstacle_turn_right();
+void move_forward_no_sensor();
 void move_forward();
 void move_backwards();
 void move_left();
@@ -91,11 +87,11 @@ void climbing();
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
+float pitchangle_previo=0.00000f;
 int stop_distance=0, move_forward_is_on=0, iteracao =0;
 
 void setup()
 {
-  // put your setup code here, to run once:
   calibra();
 
   PWM_Instance_1A = new RP2040_PWM(MOTOR_1, Freq, _90graus_Motor1);
@@ -261,7 +257,6 @@ void move_backwards(){
 }
 
 void move_right(){
-
   recebe_angulos(80,100,45,135,180,0,20,170,100);
   recebe_angulos(155,100,45,135,135,0,20,170,100);
   recebe_angulos(135,45,100,155,170,20,0,135,100);
@@ -269,38 +264,35 @@ void move_right(){
   recebe_angulos(135,45,25,80,170,20,45,180,100);
   recebe_angulos(80,25,45,135,180,45,0,135,100);
   recebe_angulos(80,100,45,135,180,0,0,135,100);  
+}
+
+void move_left(){
 
 }
 
 void turn_left(){
 
   recebe_angulos(90,0,0,90,160,20,20,160,100);
-
-  recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-  recebe_angulos(135,0,0,135,140,20,20,140,100);    //perna 1 e 4 vira
-  recebe_angulos(135,0,0,135,160,20,20,160,100);    //perna1 e 4 down
- 
-  recebe_angulos(135,0,0,135,160,40,40,160,100);    //perna 2 e 3 up
-  recebe_angulos(135,45,45,135,160,40,40,160,100);    //perna 2 e 3 vira
-  recebe_angulos(135,45,45,135,160,20,20,160,100);    //perna 2 e 3 down
- 
+  recebe_angulos(90,0,0,90,140,20,20,140,100);    
+  recebe_angulos(135,0,0,135,140,20,20,140,100);    
+  recebe_angulos(135,0,0,135,160,20,20,160,100);   
+  recebe_angulos(135,0,0,135,160,40,40,160,100);   
+  recebe_angulos(135,45,45,135,160,40,40,160,100);    
+  recebe_angulos(135,45,45,135,160,20,20,160,100);    
   recebe_angulos(90,0,0,90,160,20,20,160,100);
  
  
 }
 
 void turn_right(){
-
   recebe_angulos(180,90,90,180,160,20,20,160,100);
-  recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-  recebe_angulos(135,90,90,135,140,20,20,140,100);    //perna 1 e 4 vira
-  recebe_angulos(135,90,90,135,160,20,20,160,100);    //perna1 e 4 down
-  recebe_angulos(135,90,90,135,160,40,40,160,100);    //perna 2 e 3 up
-  recebe_angulos(135,45,45,135,160,40,40,160,100);    //perna 2 e 3 vira
-  recebe_angulos(135,45,45,135,160,20,20,160,100);    //perna 2 e 3 down
+  recebe_angulos(180,90,90,180,140,20,20,140,100);    
+  recebe_angulos(135,90,90,135,140,20,20,140,100);   
+  recebe_angulos(135,90,90,135,160,20,20,160,100);    
+  recebe_angulos(135,90,90,135,160,40,40,160,100);   
+  recebe_angulos(135,45,45,135,160,40,40,160,100);    
+  recebe_angulos(135,45,45,135,160,20,20,160,100);    
   recebe_angulos(180,90,90,180,160,20,20,160,100);
- 
-
 }
 
 
@@ -463,21 +455,21 @@ void turn_angulo_definido(int angulo_requerido){
     for(int i=0; i<num_90_degree_turns;i++){
 
       recebe_angulos(180,90,90,180,160,20,20,160,100);
-      recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(90,90,90,90,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(90,90,90,90,160,20,20,160,100);    //perna1 e 4 down
-      recebe_angulos(90,90,90,90,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(90,0,0,90,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(90,0,0,90,160,20,20,160,100);    //perna 2 e 3 down
+      recebe_angulos(180,90,90,180,140,20,20,140,100);   
+      recebe_angulos(90,90,90,90,140,20,20,140,100);    
+      recebe_angulos(90,90,90,90,160,20,20,160,100);   
+      recebe_angulos(90,90,90,90,160,40,40,160,100);    
+      recebe_angulos(90,0,0,90,160,40,40,160,100);   
+      recebe_angulos(90,0,0,90,160,20,20,160,100);   
     }
     
     recebe_angulos(180,90,90,180,160,20,20,160,100);
-    recebe_angulos(180,90,90,180,140,20,20,140,100);    //perna 1 e 4 up
-    recebe_angulos(180-servo_angle,90,90,180-servo_angle,140,20,20,140,100);    //perna 1 e 4 vira
-    recebe_angulos(180-servo_angle,90,90,180-servo_angle,160,20,20,160,100);    //perna1 e 4 down
-    recebe_angulos(180-servo_angle,90,90,180-servo_angle,160,40,40,160,100);    //perna 2 e 3 up
-    recebe_angulos(180-servo_angle,90-servo_angle,90-servo_angle,180-servo_angle,160,40,40,160,100);    //perna 2 e 3 vira
-    recebe_angulos(180-servo_angle,90-servo_angle,90-servo_angle,180-servo_angle,160,20,20,160,100);    //perna 2 e 3 down
+    recebe_angulos(180,90,90,180,140,20,20,140,100);
+    recebe_angulos(180-servo_angle,90,90,180-servo_angle,140,20,20,140,100);  
+    recebe_angulos(180-servo_angle,90,90,180-servo_angle,160,20,20,160,100);   
+    recebe_angulos(180-servo_angle,90,90,180-servo_angle,160,40,40,160,100);   
+    recebe_angulos(180-servo_angle,90-servo_angle,90-servo_angle,180-servo_angle,160,40,40,160,100);   
+    recebe_angulos(180-servo_angle,90-servo_angle,90-servo_angle,180-servo_angle,160,20,20,160,100);    
     recebe_angulos(180,90,90,180,160,20,20,160,100);
   }
 
@@ -486,30 +478,27 @@ void turn_angulo_definido(int angulo_requerido){
     for(int i=0;i<num_90_degree_turns;i++){
 
       recebe_angulos(90,0,0,90,160,20,20,160,100);
-      recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-      recebe_angulos(180,0,0,180,140,20,20,140,100);    //perna 1 e 4 vira
-      recebe_angulos(180,0,0,180,160,20,20,160,100);    //perna1 e 4 down
-      recebe_angulos(180,0,0,180,160,40,40,160,100);    //perna 2 e 3 up
-      recebe_angulos(180,90,90,180,160,40,40,160,100);    //perna 2 e 3 vira
-      recebe_angulos(180,90,90,180,160,20,20,160,100);    //perna 2 e 3 down
+      recebe_angulos(90,0,0,90,140,20,20,140,100);    
+      recebe_angulos(180,0,0,180,140,20,20,140,100);   
+      recebe_angulos(180,0,0,180,160,20,20,160,100);  
+      recebe_angulos(180,0,0,180,160,40,40,160,100);   
+      recebe_angulos(180,90,90,180,160,40,40,160,100);   
+      recebe_angulos(180,90,90,180,160,20,20,160,100);    
     }
       
     
     recebe_angulos(90,0,0,90,160,20,20,160,100);
-    recebe_angulos(90,0,0,90,140,20,20,140,100);    //perna 1 e 4 up
-    recebe_angulos(90-servo_angle,0,0,90-servo_angle,140,20,20,140,100);    //perna 1 e 4 vira
-    recebe_angulos(90-servo_angle,0,0,90-servo_angle,160,20,20,160,100);    //perna1 e 4 down
-    recebe_angulos(90-servo_angle,0,0,90-servo_angle,160,40,40,160,100);    //perna 2 e 3 up
-    recebe_angulos(90-servo_angle,-servo_angle,-servo_angle,90-servo_angle,160,40,40,160,100);    //perna 2 e 3 vira
-    recebe_angulos(90-servo_angle,-servo_angle,-servo_angle,90-servo_angle,160,20,20,160,100);    //perna 2 e 3 down  
+    recebe_angulos(90,0,0,90,140,20,20,140,100);
+    recebe_angulos(90-servo_angle,0,0,90-servo_angle,140,20,20,140,100);   
+    recebe_angulos(90-servo_angle,0,0,90-servo_angle,160,20,20,160,100);    
+    recebe_angulos(90-servo_angle,0,0,90-servo_angle,160,40,40,160,100);  
+    recebe_angulos(90-servo_angle,-servo_angle,-servo_angle,90-servo_angle,160,40,40,160,100);    
+    recebe_angulos(90-servo_angle,-servo_angle,-servo_angle,90-servo_angle,160,20,20,160,100);   
     recebe_angulos(90,0,0,90,160,20,20,160,100);
 
   }
 
 }
-
-
-
 
 void liedown(){
   recebe_angulos(180,0,0,180,90,90,90,90,100);
