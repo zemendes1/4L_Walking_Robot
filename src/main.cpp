@@ -88,38 +88,6 @@ void standup();
 void turn_angulo_definido(int angulo_requerido);
 void climbing();
 
-/*
-typedef struct {
-  int state, new_state;
-  // tes - time entering state
-  // tis - time in state
-  unsigned long tes, tis;
-} fsm_t;
-
-// Our finite state machines
-fsm_t fsm1, fsm2;
-
-// Input variables
-uint8_t S1, prevS1;
-uint8_t S2, prevS2;
-
-unsigned long S1_time , S2_time;
-
-
-unsigned long interval, last_cycle;
-unsigned long loop_micros;
-
-
-// Set new state
-void set_state(fsm_t& fsm, int new_state)
-{
-  if (fsm.state != new_state) {  // if the state chnanged tis is reset
-    fsm.state = new_state;
-    fsm.tes = millis();
-    fsm.tis = 0;
-  }
-}*/
-
 
 float m1= 0.000f,m2= 0.000f,m3= 0.000f,m4= 0.000f,m5= 0.000f,m6= 0.000f,m7= 0.000f,m8= 0.000f;
 float b1= 0.000f,b2= 0.000f,b3= 0.000f,b4= 0.000f,b5= 0.000f,b6= 0.000f,b7= 0.000f,b8= 0.000f;
@@ -144,45 +112,25 @@ void setup()
 
   Serial.begin(9600); // Starts the serial communication
 
-  /*interval = 10;
-  set_state(fsm1, 0);*/
-
-  //conecta_wifi();
-  //sonar_setup();
+  conecta_wifi();
+  sonar_setup();
   imu_setup();
-  //stop_distance=15;
+  stop_distance=15;
 }
 
 void loop()
 {   
-  //sonar_loop();
-  //conexao_html();
-  //imu_loop();
-  //delay(1000);
 
-  //standup();
-  //liedown();
-  //move_forward_no_sensor();
-  //move_right();
-  //turn_left();
-  //turn_right();
-  //obstacle_turn_right();
-  climbing();
-  
-  
-  /*
+  conexao_html();
+  imu_loop();
+
   if (move_forward_bool) {move_forward_no_sensor();}
   else if (obstacle_bool) {obstacle_turn_right();}
-  //else if (obstacle_bool) {não implementado}
+  else if (climb_bool) {climbing();}
   else if(turn_bool){
     turn_angulo_definido(AnguloDefinido);
     turn_bool=false;
   }
-  */
-
- 
- 
-
 }
 
 void obstacle_turn_right()
