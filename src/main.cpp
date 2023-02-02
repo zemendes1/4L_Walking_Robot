@@ -127,6 +127,7 @@ void loop()
     turn_angulo_definido(AnguloDefinido);
     turn_bool=false;
   }
+  
  
  
   
@@ -230,7 +231,7 @@ void move_forward_no_sensor()
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   recebe_angulos(191,45,66,135,173,28,63,152,100);
   recebe_angulos(135,66,45,191,152,63,28,174,100);
-  recebe_angulos(135,-11,45,191,152,6,28,174,100);
+  recebe_angulos(135,-11,45,191,152,25,28,174,100); 
   recebe_angulos(135,-11,45,114,152,6,28,116,100);
   recebe_angulos(114,45,-11,135,116,28,6,152,100);
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
@@ -242,7 +243,7 @@ void move_forward()
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
   recebe_angulos(191,45,66,135,173,28,63,152,100);
   recebe_angulos(135,66,45,191,152,63,28,174,100);
-  recebe_angulos(135,-11,45,191,152,6,28,174,100);
+  recebe_angulos(135,-11,45,191,152,25,28,174,100);
   recebe_angulos(135,-11,45,114,152,6,28,116,100);
   recebe_angulos(114,45,-11,135,116,28,6,152,100);
   recebe_angulos(191,45,-11,135,173,28,6,152,100);
@@ -302,7 +303,7 @@ void turn_right(){
 
 void climbing()
 { 
-  uint delay_time=500;
+  uint delay_time=200;
   uint delay_imu=100;
   int angulo_climbing=100;
   
