@@ -148,7 +148,7 @@ void imu_loop() {
   //rollangle=atan2(accelY,accelZ)*180/PI; // FORMULA FOUND ON INTERNET
   pitchangle=atan2(accelX,sqrt(accelY*accelY+accelZ*accelZ))*180/PI; //FORMULA FOUND ON INTERNET
   
-  if(Serial){
+  if(0){
   //Serial.print("Roll angle: ");Serial.println(rollangle);
   Serial.print("Pitch angle: ");Serial.println(pitchangle);
   Serial.println("");

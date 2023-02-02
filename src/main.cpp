@@ -36,27 +36,27 @@
 #define _90graus_Motor1 20.3
 #define _180graus_Motor1 35.2
 
-#define _0graus_Motor2 19.667
-#define _90graus_Motor2 35.1667
+#define _0graus_Motor2 14
+#define _90graus_Motor2 29.5
 
 #define _0graus_Motor3 19
-#define _90graus_Motor3 34.333
+#define _90graus_Motor3 34
 
-#define _90graus_Motor4 21.333
-#define _180graus_Motor4 36
+#define _90graus_Motor4 22
+#define _180graus_Motor4 36.5
 
 //motores 5 a 8
 
-#define _90graus_Motor5 23.2
+#define _90graus_Motor5 22.5
 #define _180graus_Motor5 7.5
 
-#define _0graus_Motor6 37
-#define _90graus_Motor6 21.7
+#define _0graus_Motor6 36.5
+#define _90graus_Motor6 21.2
 
-#define _0graus_Motor7 39
-#define _90graus_Motor7 24.7
+#define _0graus_Motor7 37.4
+#define _90graus_Motor7 22.2
 
-#define _90graus_Motor8 21.8
+#define _90graus_Motor8 21.2
 #define _180graus_Motor8 7.7
 
 RP2040_PWM *PWM_Instance_1A;
@@ -127,6 +127,10 @@ void loop()
     turn_angulo_definido(AnguloDefinido);
     turn_bool=false;
   }
+ 
+ 
+  
+
 }
 
 void obstacle_turn_right()
@@ -263,7 +267,7 @@ void move_right(){
   recebe_angulos(135,45,100,80,170,20,0,180,100);
   recebe_angulos(135,45,25,80,170,20,45,180,100);
   recebe_angulos(80,25,45,135,180,45,0,135,100);
-  recebe_angulos(80,100,45,135,180,0,0,135,100);  
+  recebe_angulos(80,100,45,135,180,0,0,170,100);  
 }
 
 void move_left(){
@@ -298,16 +302,18 @@ void turn_right(){
 
 void climbing()
 { 
-  uint delay_time=50;
+  uint delay_time=500;
   uint delay_imu=100;
-  int angulo_climbing=90;
+  int angulo_climbing=100;
+  
+  
 
 
   if(iteracao==0){
 
     recebe_angulos(191,45,-11,135,173,28,6,152,100);delay(delay_time);
-    recebe_angulos(191,45,-11,135,173,28,90,152,100);delay(delay_time);
-    recebe_angulos(191,45,66,135,173,28,90,152,100);delay(delay_time);
+    recebe_angulos(191,45,-11,135,173,28,105,152,100);delay(delay_time);
+    recebe_angulos(191,45,66,135,173,28,105,152,100);delay(delay_time);
     imu_loop();
 
     while(1){
@@ -334,17 +340,17 @@ void climbing()
       
     }
     delay(delay_time);
-    recebe_angulos(135,66,45,191,152,63,angulo_climbing,174,100);
+    recebe_angulos(90,66,45,191,152,63,angulo_climbing,174,100);
     delay(delay_time);
-    recebe_angulos(135,66,45,191,152,90,angulo_climbing,174,100);
+    recebe_angulos(90,66,45,191,152,90,angulo_climbing,174,100);
     delay(delay_time);
-    recebe_angulos(135,-11,45,191,152,90,angulo_climbing,174,100);
+    recebe_angulos(90,-11,45,191,152,90,angulo_climbing,174,100);
     delay(delay_time);
     recebe_angulos(135,-11,45,191,152,6,angulo_climbing,174,100);
     delay(delay_time);
-    recebe_angulos(135,-11,45,191,152,6,angulo_climbing,90,100);
+    recebe_angulos(135,-11,45,191,152,6,angulo_climbing,75,100);
     delay(delay_time);
-    recebe_angulos(135,-11,45,114,152,6,angulo_climbing,90,100);
+    recebe_angulos(135,-11,45,114,152,6,angulo_climbing,75,100);
     delay(delay_time);
     recebe_angulos(135,-11,45,114,152,6,6,180,100);
     delay(delay_time);
@@ -356,7 +362,7 @@ void climbing()
 
     iteracao++;
     recebe_angulos(165,45,40,135,173,30,10,180,100);
-    delay(5000);
+    delay(500);
   }
   else{
     recebe_angulos(191,90,-11,135,173,28,6,152,100);delay(delay_time);
@@ -382,15 +388,15 @@ void climbing()
       delay(delay_time);
       recebe_angulos(135,45,45,114,152,6,6,180,100);
       delay(delay_time);
-      recebe_angulos(114,66,40,135,116,28,6,180,100);
+      recebe_angulos(114,90,40,135,116,28,0,180,100);
       delay(delay_time);
-      recebe_angulos(114,66,40,135,90,28,6,180,100);
+      recebe_angulos(114,90,40,135,90,28,0,180,100);
       delay(delay_time);
-      recebe_angulos(191,66,40,135,90,28,6,180,100);
+      recebe_angulos(191,90,40,135,90,28,0,180,100);
       delay(delay_time);
       iteracao++;
       recebe_angulos(120,45,40,135,173,30,10,180,100);
-      delay(5000);
+      delay(500);
 
     }
 
@@ -418,7 +424,7 @@ void climbing()
       recebe_angulos(191,66,-11,135,90,28,6,180,100);
       delay(delay_time);
       recebe_angulos(191,45,40,135,173,30,10,180,100);
-      delay(5000);
+      delay(500);
       
 
     }

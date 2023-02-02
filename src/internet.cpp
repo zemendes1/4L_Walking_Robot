@@ -10,10 +10,10 @@
 //const char* password = "Donald1Trump2";
 //const char* ssid = "MEO-F44E90";
 //const char* password = "de6ee7ea05";
-//const char* ssid = "iPhone de Diogo";
-//const char* password = "obodamorreu";
-const char* ssid = "Acabou";
-const char* password = "nova1234";
+const char* ssid = "iPhone de Diogo";
+const char* password = "obodamorreu";
+//const char* ssid = "Acabou";
+//const char* password = "nova1234";
 
 // Set web server port number to 80
 WiFiServer server(80);
@@ -55,7 +55,7 @@ String turn_state = "off";
 
 void conecta_wifi(){
   // Start Serial Monitor
-  Serial.begin(115200);
+
  
   // Initialize the LED as an output
   pinMode(6, OUTPUT);
