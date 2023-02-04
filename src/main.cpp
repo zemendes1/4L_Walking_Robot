@@ -34,24 +34,24 @@
 //motores 1 a 4
 
 #define _90graus_Motor1 20.3
-#define _180graus_Motor1 35.2
+#define _180graus_Motor1 36.7
 
-#define _0graus_Motor2 14
-#define _90graus_Motor2 29.5
+#define _0graus_Motor2 12.5
+#define _90graus_Motor2 30.5
 
 #define _0graus_Motor3 19
 #define _90graus_Motor3 34
 
-#define _90graus_Motor4 22
-#define _180graus_Motor4 36.5
+#define _90graus_Motor4 15
+#define _180graus_Motor4 31
 
 //motores 5 a 8
 
 #define _90graus_Motor5 22.5
 #define _180graus_Motor5 7.5
 
-#define _0graus_Motor6 36.5
-#define _90graus_Motor6 21.2
+#define _0graus_Motor6 39
+#define _90graus_Motor6 20.5
 
 #define _0graus_Motor7 37.4
 #define _90graus_Motor7 22.2
@@ -112,11 +112,12 @@ void setup()
   sonar_setup();
   imu_setup();
   stop_distance=15;
+
 }
 
 void loop()
-{   
-
+{ 
+  
   conexao_html();
   imu_loop();
 
@@ -128,8 +129,8 @@ void loop()
     turn_bool=false;
   }
   
- 
- 
+
+  
   
 
 }
@@ -138,7 +139,7 @@ void obstacle_turn_right()
 { 
   sonar_loop();
   if(distance_sonar<stop_distance){
-    move_right();
+    move_right();move_right();move_right();
   }
   else{
     move_forward();
